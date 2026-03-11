@@ -1,7 +1,8 @@
-package main;
+package main
 
 import "fmt"
-import "learning/go/variables"
+import "learning/go/basics"
+import "learning/go/projects/glogger"
 
 func main() {
 	// Printing in Go
@@ -13,5 +14,17 @@ func main() {
 	fmt.Printf("printf func from fmt, provides control over vars while printing\n")
 
 	// Variables in Go
-	variables.VarsInGo()
+	basics.VarsInGo()
+
+	// Constants in Go
+	basics.ConstInGo()
+	basics.IotaInGO()
+
+	// 1st project custom logger
+	fmt.Println("******* Custom Logger *******")
+	glog.Log(0, "implemented custom logger")
+	glog.Log(1, "used iota for log levels")
+	glog.Log(2, "defined a type Loglevel")
+	glog.Log(3, "created a func Log")
+	glog.Log(4, "accepts LogLevel and a log msg")
 }
