@@ -5,6 +5,7 @@ import (
 	"learning/go/basics"
 	"learning/go/projects/glogger"
 	"learning/go/projects/order"
+	"learning/go/datastructures"
 )
 
 func main() {
@@ -41,5 +42,16 @@ func main() {
 	fmt.Println("\n******* Order Processing *******")
 	cart := order.AddToCart([]string{"Shirts", "Pants", "Shoes"})
 	orderDetails := order.ProcessOrder(cart, true)
-	fmt.Printf("Order Details: Order-ID -- %s\nItems -- %v\nBase Price -- %.2f\nFinal Price -- %.2f\nDiscount -- %.2f\n", orderDetails["orderID"], orderDetails["items"], orderDetails["basePrice"], orderDetails["finalPrice"], orderDetails["discount"])
+	fmt.Printf("Order Details: Order-ID -- %s\nItems -- %v\nBase Price -- %.2f\nFinal Price -- %.2f\nDiscount -- %.2f\n",
+		orderDetails["orderID"],
+		orderDetails["items"],
+		orderDetails["basePrice"],
+		orderDetails["finalPrice"],
+		orderDetails["discount"],
+	)
+
+	// data structures in Go
+	fmt.Println("\n******* Data Structures *******")
+	datastructures.ArraysInGo()
+	datastructures.SlicesInGo()
 }
