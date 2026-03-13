@@ -54,4 +54,5 @@ func main() {
 	fmt.Println("\n******* Data Structures *******")
 	datastructures.ArraysInGo()
 	datastructures.SlicesInGo()
+	datastructures.MapsInGo()
 }
