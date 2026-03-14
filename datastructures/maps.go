@@ -8,7 +8,7 @@ import (
 basic definition: map[keyType]valueType
 */
 func MapsInGo() {
-	fmt.Println("******* Maps In Go *******")
+	fmt.Println("\n******* Maps In Go *******")
 	// using var
 	// this will result in nill[zero-value]
 	//```go
@@ -53,4 +53,9 @@ func MapsInGo() {
 
 	fmt.Println("after delete operation")
 	fmt.Printf("%+v\n", appConfig["App"])
+
+	fmt.Println("-- range loop in map --")
+	for key, value := range appConfig["App"] {
+		fmt.Printf("Key: %s, Value: %s\n", key, value)
+	}
 }

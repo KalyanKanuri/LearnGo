@@ -3,9 +3,10 @@ package main
 import (
 	"fmt"
 	"learning/go/basics"
+	"learning/go/core"
+	"learning/go/datastructures"
 	"learning/go/projects/glogger"
 	"learning/go/projects/order"
-	"learning/go/datastructures"
 )
 
 func main() {
@@ -55,4 +56,7 @@ func main() {
 	datastructures.ArraysInGo()
 	datastructures.SlicesInGo()
 	datastructures.MapsInGo()
+
+	// Pointers in Go
+	core.PointersInGo()
 }
