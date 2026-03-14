@@ -16,17 +16,16 @@ func MapsInGo() {
 	// ```
 	// the above method is not suggested as it will just decalres and doesn't allocate any memory
 
-
 	// using literal
 	// insert operation
 	fmt.Println("-- using literal method --")
 	studentDetails := map[string]string{
-		"Name": "Pavitr Prabhakar",
-		"Age": "20",
-		"Address": "Mumbai, India",
-		"Class": "2nd Year",
+		"Name":            "Pavitr Prabhakar",
+		"Age":             "20",
+		"Address":         "Mumbai, India",
+		"Class":           "2nd Year",
 		"Speciailization": "Computer Science",
-		"University": "MCU",
+		"University":      "MCU",
 	}
 
 	// access and read
@@ -40,7 +39,7 @@ func MapsInGo() {
 	// insert
 	fmt.Println("-- using make func --")
 	appConfig := make(map[string]map[string]string) // this will create only one mape
-	appConfig["App"] = make(map[string]string) // we have to make again the inner map
+	appConfig["App"] = make(map[string]string)      // we have to make again the inner map
 	appConfig["App"]["AppName"] = "QuickByte"
 	appConfig["App"]["version"] = "1.0.0"
 	appConfig["App"]["backend"] = "Go"

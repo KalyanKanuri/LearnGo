@@ -5,6 +5,7 @@ import (
 	"learning/go/basics"
 	"learning/go/core"
 	"learning/go/datastructures"
+	"learning/go/projects/contactbook"
 	"learning/go/projects/glogger"
 	"learning/go/projects/order"
 )
@@ -59,4 +60,47 @@ func main() {
 
 	// Pointers in Go
 	core.PointersInGo()
+
+	// 3rd project contact book
+	fmt.Println("\n******* Contact Book *******")
+	fmt.Println("-- Adding Contacts --")
+	contact1 := contactbook.Contact{
+		Name:  "John Doe",
+		Age:   30,
+		Email: "2P5oq@example.com",
+		Phone: "123-456-7890",
+	}
+	contactbook.AddContact(&contact1)
+
+	contact2 := contactbook.Contact{
+		Name:  "Jane Doe",
+		Age:   25,
+		Email: "4rB2H@example.com",
+		Phone: "987-654-3210",
+	}
+	contactbook.AddContact(&contact2)
+
+	contact3 := contactbook.Contact{
+		Name:  "John Doe",
+		Age:   35,
+		Email: "2P5oq@example.com",
+		Phone: "123-456-7890",
+	}
+	contactbook.AddContact(&contact3)
+
+	fmt.Println("-- Listing Contacts --")
+	contactbook.ListContacts()
+
+	fmt.Println("-- Getting Contact --")
+	user, exists := contactbook.GetContact("John Doe")
+	if exists {
+		fmt.Printf("Contact found: Name: %s, Age: %d, Email: %s, Phone: %s\n",
+			user.Name,
+			user.Age,
+			user.Email,
+			user.Phone,
+		)
+	} else {
+		fmt.Println("Contact not found.")
+	}
 }
