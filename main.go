@@ -103,4 +103,7 @@ func main() {
 	} else {
 		fmt.Println("Contact not found.")
 	}
+
+	// Funcs In Go
+	core.FuncsInGo()
 }
