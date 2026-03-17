@@ -26,7 +26,7 @@ func intSeq() func() int {
 func sum(nums ...int) int {
 	total := 0
 	if len(nums) > 0 {
-		for _, num := range(nums) {
+		for _, num := range nums {
 			total += num
 		}
 	}
@@ -38,6 +38,17 @@ func divide(a, b int) (int, error) {
 		return 0, errors.New("cannot perform division")
 	}
 	return a / b, nil
+}
+
+func simulateDefer() {
+	fmt.Println("simulateDefer: start")
+	defer fmt.Println("simulateDefer: middle")
+	//eventhough we are expecting this print at end
+	// defer will make the above statment to print last
+	// if we have two defers it will follow lifo principle that is the last defer will execute first
+	fmt.Println("simulateDefer: end")
+	fmt.Println("multi defer in func")
+	defer fmt.Println("simulateDefer: second defer")
 }
 
 func FuncsInGo() {
@@ -72,7 +83,7 @@ func FuncsInGo() {
 
 	fmt.Println("-- Variadic Function --")
 	// if we don't pass any nums the total will simply be 0
-	sumOfNums := sum(1,2,3,4)
+	sumOfNums := sum(1, 2, 3, 4)
 	fmt.Println("sum of numbers:", sumOfNums)
 
 	fmt.Println("-- Return multi values --")
@@ -81,4 +92,7 @@ func FuncsInGo() {
 	} else {
 		fmt.Println("ERROR:", err)
 	}
+
+	fmt.Println("-- defer in Go --")
+	simulateDefer()
 }

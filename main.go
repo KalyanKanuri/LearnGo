@@ -106,4 +106,7 @@ func main() {
 
 	// Funcs In Go
 	core.FuncsInGo()
+
+	// Panic & Recover In Go
+	core.PanicRecoverInGo()
 }
