@@ -109,4 +109,22 @@ func main() {
 
 	// Panic & Recover In Go
 	core.PanicRecoverInGo()
+
+	// OOPS in GO
+	fmt.Println("\n******* OOPS in Go *******")
+	fmt.Println("-- receivers & methods --")
+	kalyan := core.NewEmployee(
+		123,
+		"Kanuri",
+		"Kalyan",
+		"kalyankanuri497@gmail.com",
+		"+91 9963059178",
+		true,
+		"Software Development",
+	)
+	fmt.Printf("%+v\n", kalyan)
+	fullname := kalyan.GetEmployeeFullName()
+	fmt.Println("Employee FullName:", fullname)
+	kalyan.UpdateActiveState()
+	fmt.Printf("After IsActive state update -> %+v\n", kalyan.IsActive)
 }
