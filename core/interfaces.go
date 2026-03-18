@@ -2,6 +2,7 @@ package core
 
 /*
  * Interfaces In Go
+ * ----------------
  * Interfaces are like blueprints of objects
  * it's a contract between the object and the code that uses the object
  * for e.g., below we have created an interface called Area every object

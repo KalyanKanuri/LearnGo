@@ -4,6 +4,24 @@ import (
 	"fmt"
 )
 
+/*
+ * Pointers in Go
+ * --------------
+ * Go is call by value only, it doesn't use references to the objects
+ * so it always creates a copy of the passed value to the function, hence
+ * we use pointers to update or change the actual object instead of copy
+ * of the object passed, we have some exception with some types which are:
+ * > slices
+ * > maps
+ * > interfaces
+ * > funcs
+ * > channels
+ * -- we got a catch here, if we pass the value and update the value in func
+ *    and pass it from the func it will achieve the same functionality what is done
+ *    when pointers are passed but the original will not be changes, it would create
+ *	  a new copy and that new copy will be returned instaed
+ */
+
 func PointersInGo() {
 	fmt.Println("\n******* Pointers In Go *******")
 	// declaring a pointer variable
