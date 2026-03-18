@@ -127,4 +127,7 @@ func main() {
 	fmt.Println("Employee FullName:", fullname)
 	kalyan.UpdateActiveState()
 	fmt.Printf("After IsActive state update -> %+v\n", kalyan.IsActive)
+
+	// Generics in Go
+	core.GenericsInGo()
 }
