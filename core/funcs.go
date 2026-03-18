@@ -16,6 +16,7 @@ func recursionInGo(n int) int {
 // Closures -- returning a func from a func
 func intSeq() func() int {
 	i := 0
+	// this is also called as an anonymous function
 	return func() int {
 		i++
 		return i
@@ -95,4 +96,11 @@ func FuncsInGo() {
 
 	fmt.Println("-- defer in Go --")
 	simulateDefer()
+
+	fmt.Println("-- Anonymous Functions in Go --")
+	sum := func(a, b int) int {
+		return a + b
+	}
+
+	fmt.Println("AF: calling sum ->", sum(5, 2))
 }
