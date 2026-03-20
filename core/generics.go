@@ -31,5 +31,5 @@ func GenericsInGo() {
 	// as we have defined sum to accept any type within int and float
 	// we are able to pass int as well float as args
 	total := doSum(1, 2.5, 10, 30.6, 12)
-	fmt.Printf("total: %+v", total)
+	fmt.Printf("total: %+v\n", total)
 }

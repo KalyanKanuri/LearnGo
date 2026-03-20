@@ -8,6 +8,7 @@ import (
 	"learning/go/projects/contactbook"
 	"learning/go/projects/glogger"
 	"learning/go/projects/order"
+	"learning/go/projects/payrollprocessor"
 )
 
 func main() {
@@ -130,4 +131,23 @@ func main() {
 
 	// Generics in Go
 	core.GenericsInGo()
+
+	// 4th Project Payroll Process
+	fmt.Println("\n******* Payroll Processor *******")
+	salEmp := payrollprocessor.SalariedEmployee{
+		ID:           123,
+		Name:         "John Cena",
+		AnnualSalary: 900000.0,
+	}
+	hourEmp := payrollprocessor.HourlyEmployee{
+		ID:         136,
+		Name:       "Jane Smith",
+		HourlyRate: 36.0,
+		HourlyPay:  1600.0,
+	}
+	empList := []payrollprocessor.SalaryPayer{
+		salEmp,
+		hourEmp,
+	}
+	payrollprocessor.ProcessPayroll(empList)
 }
