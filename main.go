@@ -150,4 +150,9 @@ func main() {
 		hourEmp,
 	}
 	payrollprocessor.ProcessPayroll(empList)
+
+	// Embedding in Go
+	core.EmbeddingInGo()
+
+	
 }
