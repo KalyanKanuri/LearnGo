@@ -14,8 +14,17 @@ type Account struct {
 	IsActive      bool
 }
 
+type Transaction struct {
+	ID     int
+	Type   string
+	Amount float64
+	Account
+}
+
 var accounts map[string]*Account
 var accTypePrefixes []string
+var transList []string
+var transactions map[string][]string
 
 func init() {
 	accounts = make(map[string]*Account)
@@ -24,6 +33,8 @@ func init() {
 		"CRE",
 		"CUR",
 	}
+	transactions = make(map[string][]string)
+	transList = make([]string, 0)
 }
 
 func (a Account) String() string {
@@ -51,6 +62,10 @@ func generateAccNumber(accTypePrefix string) string {
 	return ""
 }
 
+func genTransID() int {
+	return rand.IntN(1000)
+}
+
 func (acc *Account) createAccount() error {
 	// check if account already exists and store
 	for accNum, Account := range accounts {
@@ -75,12 +90,31 @@ func (acc *Account) createAccount() error {
 	return nil
 }
 
+func (trans Transaction) createTransaction() {
+	fmt.Println("Creating transaction")
+	transaction := fmt.Sprintf("Transaction -- %s created on account %s with amount %.2f,",
+		trans.Type,
+		trans.AccountNumber,
+		trans.Amount,
+	)
+	transList = append(transList, transaction)
+	transactions[trans.Account.AccountNumber] = transList
+	fmt.Println("Created transaction", transactions)
+}
+
 func (acc *Account) deposit(amount float64) {
 	fmt.Printf("\nProcessing deposit of amount %.2f into account %s\n",
 		amount,
 		acc.AccountNumber,
 	)
 	acc.Balance += amount
+	trans := Transaction{
+		Account: *acc,
+		ID:      genTransID(),
+		Type:    "credit",
+		Amount:  amount,
+	}
+	trans.createTransaction()
 	fmt.Printf("Processed amount %.2f, into account %s, - updated balance %.2f\n",
 		amount,
 		acc.AccountNumber,
@@ -101,6 +135,13 @@ func (acc *Account) withdraw(amount float64) error {
 		return err
 	}
 	acc.Balance -= amount
+	trans := Transaction{
+		Account: *acc,
+		ID:      genTransID(),
+		Type:    "debit",
+		Amount:  amount,
+	}
+	trans.createTransaction()
 	fmt.Printf("Processed withdraw of amount %.2f, from account %s - updated balance %.2f\n",
 		amount,
 		acc.AccountNumber,
@@ -121,6 +162,15 @@ func (acc *Account) addInterest() {
 		acc.AccountNumber,
 		acc.Balance,
 	)
+}
+
+func (acc Account) getTransactions() []string {
+	for accNum, transactions := range transactions {
+		if accNum == acc.AccountNumber {
+			return transactions
+		}
+	}
+	return nil
 }
 
 func AccManager() {
@@ -148,5 +198,5 @@ func AccManager() {
 	savAcc.deposit(1000)
 	savAcc.withdraw(100)
 	savAcc.addInterest()
-	fmt.Println(accounts)
+	fmt.Println("\nTransaction History: ", savAcc.getTransactions())
 }
