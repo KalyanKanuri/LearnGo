@@ -5,6 +5,7 @@ import (
 	"learning/go/basics"
 	"learning/go/core"
 	"learning/go/datastructures"
+	"learning/go/projects/bankaccounts"
 	"learning/go/projects/contactbook"
 	"learning/go/projects/glogger"
 	"learning/go/projects/order"
@@ -154,5 +155,7 @@ func main() {
 	// Embedding in Go
 	core.EmbeddingInGo()
 
-	
+	// 5th Project Bank Account Manager
+	fmt.Println("\n******* Bank Account Manager *******")
+	bankaccounts.AccManager()
 }
