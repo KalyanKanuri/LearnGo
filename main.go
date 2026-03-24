@@ -5,6 +5,7 @@ import (
 	"learning/go/basics"
 	"learning/go/core"
 	"learning/go/datastructures"
+	"learning/go/extensions"
 	"learning/go/projects/bankaccounts"
 	"learning/go/projects/contactbook"
 	"learning/go/projects/glogger"
@@ -158,4 +159,7 @@ func main() {
 	// 5th Project Bank Account Manager
 	fmt.Println("\n******* Bank Account Manager *******")
 	bankaccounts.AccManager()
+
+	fmt.Println("\n******* Regular Expressions in Go *******")
+	extensions.RegexInGo()
 }
