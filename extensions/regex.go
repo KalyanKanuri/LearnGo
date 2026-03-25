@@ -24,5 +24,5 @@ func RegexInGo() {
 	pattern := `[a-zA-z]+@[a-zA-z]+\.(com|net)`
 	compiled = regexp.MustCompile(pattern)
 	matchResult := compiled.MatchString(email)
-	fmt.Printf("Email validator result --> pattern: %+v, text: %+v, result: %t", pattern, email, matchResult)
+	fmt.Printf("Email validator result --> pattern: %+v, text: %+v, result: %t\n", pattern, email, matchResult)
 }

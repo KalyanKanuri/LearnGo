@@ -162,4 +162,10 @@ func main() {
 
 	fmt.Println("\n******* Regular Expressions in Go *******")
 	extensions.RegexInGo()
+
+	fmt.Println("\n******* Templates in Go *******")
+	extensions.TextTemplatesInGo()
+
+	fmt.Println("\n******* Buffer Reader in Go *******")
+	extensions.BufferReaderInGo()
 }
