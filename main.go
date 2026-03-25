@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"learning/go/advanced/concurrency"
 	"learning/go/basics"
 	"learning/go/core"
 	"learning/go/datastructures"
@@ -168,4 +169,7 @@ func main() {
 
 	fmt.Println("\n******* Buffer Reader in Go *******")
 	extensions.BufferReaderInGo()
+
+	fmt.Println("\n******* Concurrency in Go *******")
+	concurrency.GoRoutinesInGo()
 }
