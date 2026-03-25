@@ -9,6 +9,6 @@ import (
 func BufferReaderInGo() {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Enter your Name: ")
-	name, _, _ := reader.ReadLine()
+	name, _ := reader.ReadString('\n')
 	fmt.Printf("Hello %s", name)
 }
