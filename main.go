@@ -9,6 +9,7 @@ import (
 	"learning/go/extensions"
 	"learning/go/projects/bankaccounts"
 	"learning/go/projects/contactbook"
+	"learning/go/projects/filedownloader"
 	"learning/go/projects/glogger"
 	"learning/go/projects/order"
 	"learning/go/projects/payrollprocessor"
@@ -174,4 +175,8 @@ func main() {
 	concurrency.GoRoutinesInGo()
 	concurrency.WaitGroupsInGo()
 	concurrency.ChannelsInGo()
+
+	// 6th Project Concurrent File Downloader
+	fmt.Println("\n******* Concurrent File Downloader *******")
+	filedownloader.TriggerDownload()
 }
