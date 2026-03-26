@@ -16,6 +16,9 @@ func executeTask(msg string, delay time.Duration) {
 func GoRoutinesInGo() {
 	fmt.Println("-- Go Routines in Go --")
 	go executeTask("Executing demo go routine", time.Second)
+	go executeTask("Executing demo go routine", 4*time.Second)
+	go executeTask("Executing demo go routine", 4*time.Second)
+	go executeTask("Executing demo go routine", 4*time.Second)
 	// we have to give sufficient time for go routine to complete
 	time.Sleep(2 * time.Second) // wait for go routine to complete
 }

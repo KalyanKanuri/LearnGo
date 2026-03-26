@@ -172,4 +172,6 @@ func main() {
 
 	fmt.Println("\n******* Concurrency in Go *******")
 	concurrency.GoRoutinesInGo()
+	concurrency.WaitGroupsInGo()
+	concurrency.ChannelsInGo()
 }
