@@ -1,0 +1,2 @@
+writing into file using bufio.NewWriter
+Appending new line using os.OpenFile() and os.O_APPEND flag

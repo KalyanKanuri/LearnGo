@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"learning/go/advanced/concurrency"
+	"learning/go/advanced/fileio"
 	"learning/go/basics"
 	"learning/go/core"
 	"learning/go/datastructures"
@@ -180,4 +181,8 @@ func main() {
 	// 6th Project Concurrent File Downloader
 	fmt.Println("\n******* Concurrent File Downloader *******")
 	filedownloader.TriggerDownload()
+
+	// File ops In Go
+	fmt.Println("\n******* File Operations in Go *******")
+	fileio.FileIOInGo()
 }
