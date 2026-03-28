@@ -185,4 +185,6 @@ func main() {
 	// File ops In Go
 	fmt.Println("\n******* File Operations in Go *******")
 	fileio.FileIOInGo()
+	fileio.HandleFilePaths()
+	fileio.HandlerDirsInGo()
 }
