@@ -187,4 +187,5 @@ func main() {
 	fileio.FileIOInGo()
 	fileio.HandleFilePaths()
 	fileio.HandlerDirsInGo()
+	fileio.EmbedFilesInGo()
 }

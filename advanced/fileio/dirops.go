@@ -1,6 +1,7 @@
 package fileio
 
 import (
+	"embed"
 	"fmt"
 	"os"
 )
@@ -21,4 +22,14 @@ func HandlerDirsInGo() {
 
 	fileInfo, _ := os.Stat("go.mod")
 	fmt.Println(fileInfo.Size(), "bytes")
+}
+
+// below is not a comment it's the syntax for embedding static files in Go
+//go:embed public
+var public embed.FS
+
+func EmbedFilesInGo() {
+	fmt.Println("-- Embedding Static Files in Go --")
+	data, _ := public.ReadFile("public/text.md")
+	fmt.Println(string(data))
 }
