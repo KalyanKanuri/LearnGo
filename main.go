@@ -175,6 +175,7 @@ func main() {
 	concurrency.GoRoutinesInGo()
 	concurrency.WaitGroupsInGo()
 	concurrency.ChannelsInGo()
+	concurrency.MutexInGo()
 
 	// 6th Project Concurrent File Downloader
 	fmt.Println("\n******* Concurrent File Downloader *******")
