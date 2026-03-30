@@ -25,6 +25,7 @@ func HandlerDirsInGo() {
 }
 
 // below is not a comment it's the syntax for embedding static files in Go
+//
 //go:embed public
 var public embed.FS
 
