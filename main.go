@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"learning/go/advanced/concurrency"
+	"learning/go/advanced/data_security"
+	"learning/go/advanced/fileio"
 	"learning/go/basics"
 	"learning/go/core"
 	"learning/go/datastructures"
@@ -175,8 +177,20 @@ func main() {
 	concurrency.GoRoutinesInGo()
 	concurrency.WaitGroupsInGo()
 	concurrency.ChannelsInGo()
+	concurrency.MutexInGo()
 
 	// 6th Project Concurrent File Downloader
 	fmt.Println("\n******* Concurrent File Downloader *******")
 	filedownloader.TriggerDownload()
+
+	// File ops In Go
+	fmt.Println("\n******* File Operations in Go *******")
+	fileio.FileIOInGo()
+	fileio.HandleFilePaths()
+	fileio.HandlerDirsInGo()
+	fileio.EmbedFilesInGo()
+
+	// Data Security & Encode-Decode in Go
+	fmt.Println("\n******* DataSecurity Encoding-Decoding in Go *******")
+	datasecurity.MarshalUnMarshalInGo()
 }
