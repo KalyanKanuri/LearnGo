@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"learning/go/advanced/concurrency"
+	"learning/go/advanced/data_security"
 	"learning/go/advanced/fileio"
 	"learning/go/basics"
 	"learning/go/core"
@@ -188,4 +189,8 @@ func main() {
 	fileio.HandleFilePaths()
 	fileio.HandlerDirsInGo()
 	fileio.EmbedFilesInGo()
+
+	// Data Security & Encode-Decode in Go
+	fmt.Println("\n******* DataSecurity Encoding-Decoding in Go *******")
+	datasecurity.MarshalUnMarshalInGo()
 }
