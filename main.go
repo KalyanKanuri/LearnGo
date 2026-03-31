@@ -193,4 +193,6 @@ func main() {
 	// Data Security & Encode-Decode in Go
 	fmt.Println("\n******* DataSecurity Encoding-Decoding in Go *******")
 	datasecurity.MarshalUnMarshalInGo()
+	datasecurity.EncodeDecodeInGo()
+	datasecurity.Base64EncodeDecodeInGo()
 }
