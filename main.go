@@ -8,6 +8,7 @@ import (
 	"learning/go/basics"
 	"learning/go/core"
 	"learning/go/datastructures"
+	"learning/go/dbms"
 	"learning/go/extensions"
 	"learning/go/projects/bankaccounts"
 	"learning/go/projects/contactbook"
@@ -195,4 +196,8 @@ func main() {
 	datasecurity.MarshalUnMarshalInGo()
 	datasecurity.EncodeDecodeInGo()
 	datasecurity.Base64EncodeDecodeInGo()
+
+	// DBMS in GO [SQLite3]
+	fmt.Println("******* [SQLite3] DBMS in Go *******")
+	dbms.CreateSQLiteDB()
 }
