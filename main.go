@@ -200,6 +200,7 @@ func main() {
 	// DBMS in GO [SQLite3]
 	fmt.Println("******* [SQLite3] DBMS in Go *******")
 	db := dbms.CreateSQLiteDB()
+	defer db.Close()
 	dbSchema := dbms.ReadDBSchema("create_table.sql")
 	_, err := db.Exec(dbSchema)
 	if err != nil {
@@ -210,4 +211,7 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println(result.LastInsertId())
+	dbms.ReadFromUserDetails(db)
+	dbms.PrepareStmntInGo(db)
+	dbms.TxnInGo(db)
 }
