@@ -16,7 +16,7 @@ import (
  * to have sqlite3 driver with pure go we can use github.com/modernc-org/sqlite
  */
 
-func CreateSQLiteDB() {
+func CreateSQLiteDB() *sql.DB {
 	fmt.Println("-- [SQLite3] Creating tables in Go --")
 	os.Remove("demo.db")
 
@@ -24,10 +24,5 @@ func CreateSQLiteDB() {
 	if err != nil {
 		fmt.Printf("Error creating sqlite db: %+v\n", err)
 	}
-
-	dbSchema := ReadDBSchema("create_table.sql")
-	_, err = db.Exec(dbSchema)
-	if err != nil {
-		fmt.Printf("Error while executing schema %+v", err)
-	}
+	return db
 }

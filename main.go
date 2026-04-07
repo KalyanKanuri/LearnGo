@@ -199,5 +199,15 @@ func main() {
 
 	// DBMS in GO [SQLite3]
 	fmt.Println("******* [SQLite3] DBMS in Go *******")
-	dbms.CreateSQLiteDB()
+	db := dbms.CreateSQLiteDB()
+	dbSchema := dbms.ReadDBSchema("create_table.sql")
+	_, err := db.Exec(dbSchema)
+	if err != nil {
+		fmt.Printf("Error while executing schema %+v", err)
+	}
+	result, err := dbms.InsertToUserDetails(db)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(result.LastInsertId())
 }
