@@ -11,7 +11,8 @@ func PrepareStmntInGo(db *sql.DB) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	res, err := stmnt.Exec(2, "Jo", "joskjf", "jo@gmail.com")
+	pwd := hashPwd("joskjf")
+	res, err := stmnt.Exec(2, "Jo", string(pwd), "jo@gmail.com")
 	if err != nil {
 		fmt.Println(err)
 	}
