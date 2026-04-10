@@ -17,7 +17,7 @@ func hashPwd(pwd string) []byte {
 
 func InsertToUserDetails(db *sql.DB) (sql.Result, error) {
 	fmt.Println("-- Insert Records into User Details --")
-	query := `INSERT INTO USER_DETAILS (ID, USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?, ?)`
+	query := `INSERT INTO USER_DETAILS (USER_ID, USERNAME, PASSWORD, EMAIL) VALUES (?, ?, ?, ?)`
 	uname := "John"
 	pwd := "Johnpwd"
 	email := "john@email.com"

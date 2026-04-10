@@ -17,7 +17,7 @@ type User struct {
 func ReadFromUserDetails(db *sql.DB) {
 	fmt.Println("-- Read From User Details --")
 	var users []User
-	query := `SELECT UD.ID, UD.USERNAME, UD.PASSWORD, UD.EMAIL, UP.IS_ACTIVE FROM USER_DETAILS UD JOIN USER_PROFILE UP ON UD.ID = UP.USER_ID;`
+	query := `SELECT UD.USER_ID, UD.USERNAME, UD.PASSWORD, UD.EMAIL, UP.IS_ACTIVE FROM USER_DETAILS UD JOIN USER_PROFILE UP ON UD.USER_ID = UP.USER_ID;`
 	rows, err := db.Query(query)
 	if err != nil {
 		fmt.Println(err)

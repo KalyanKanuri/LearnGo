@@ -7,7 +7,7 @@ import (
 
 func PrepareStmntInGo(db *sql.DB) {
 	fmt.Println("-- Prepare Statement in Go --")
-	stmnt, err := db.Prepare(`Insert into User_Details (ID, Username, password, email) values(?, ?, ?, ?)`)
+	stmnt, err := db.Prepare(`Insert into User_Details (USER_ID, Username, password, email) values(?, ?, ?, ?)`)
 	if err != nil {
 		fmt.Println(err)
 	}

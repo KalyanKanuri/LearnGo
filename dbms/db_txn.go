@@ -19,7 +19,7 @@ func TxnInGo(db *sql.DB) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	stmnt, err := txn.Prepare(`Insert into User_Details (ID, Username, password, email) values(?, ?, ?, ?)`)
+	stmnt, err := txn.Prepare(`Insert into User_Details (User_ID, Username, password, email) values(?, ?, ?, ?)`)
 	if err != nil {
 		fmt.Println(err)
 	}

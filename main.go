@@ -9,6 +9,7 @@ import (
 	"learning/go/core"
 	"learning/go/datastructures"
 	"learning/go/dbms"
+	repopattern "learning/go/dbms/repo_pattern"
 	"learning/go/extensions"
 	"learning/go/projects/bankaccounts"
 	"learning/go/projects/contactbook"
@@ -214,4 +215,5 @@ func main() {
 	dbms.PrepareStmntInGo(db)
 	dbms.TxnInGo(db)
 	dbms.ReadFromUserDetails(db)
+	repopattern.RepoPatternInGo()
 }
