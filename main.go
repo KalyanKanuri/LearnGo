@@ -199,7 +199,7 @@ func main() {
 	datasecurity.Base64EncodeDecodeInGo()
 
 	// DBMS in GO [SQLite3]
-	fmt.Println("******* [SQLite3] DBMS in Go *******")
+	fmt.Println("\n******* [SQLite3] DBMS in Go *******")
 	db := dbms.CreateSQLiteDB()
 	defer db.Close()
 	dbSchema := dbms.ReadDBSchema("create_tables.sql")
@@ -216,4 +216,6 @@ func main() {
 	dbms.TxnInGo(db)
 	dbms.ReadFromUserDetails(db)
 	repopattern.RepoPatternInGo()
+
+	core.ContextInGo()
 }

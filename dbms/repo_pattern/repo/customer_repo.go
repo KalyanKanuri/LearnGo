@@ -8,7 +8,7 @@ import (
 )
 
 type CustomerRepo interface {
-	CreateCustomer(cust *models.Customer)
+	CreateCustomer(cust *models.Customer) int
 	GetCustomer(name string) models.Customer
 }
 
