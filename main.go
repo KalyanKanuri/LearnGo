@@ -173,13 +173,15 @@ func main() {
 	extensions.TextTemplatesInGo()
 
 	fmt.Println("\n******* Buffer Reader in Go *******")
-	extensions.BufferReaderInGo()
+	// extensions.BufferReaderInGo()
 
 	fmt.Println("\n******* Concurrency in Go *******")
 	concurrency.GoRoutinesInGo()
 	concurrency.WaitGroupsInGo()
 	concurrency.ChannelsInGo()
 	concurrency.MutexInGo()
+	concurrency.WorkerPoolInGo()
+	concurrency.WorkerPoolV2()
 
 	// 6th Project Concurrent File Downloader
 	fmt.Println("\n******* Concurrent File Downloader *******")

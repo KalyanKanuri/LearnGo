@@ -46,7 +46,7 @@ func ContextInGo() {
 		}
 	}(cancelCtx)
 
-	time.Sleep(time.Second)
+	time.Sleep(time.Millisecond)
 	cancCan() // manually cancel
 
 	<-cancelDoneChan

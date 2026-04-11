@@ -72,3 +72,21 @@ func main() {
     close(ch) // closing a channel
 }
 ```
+
+if we pass channel as <-chan in a func it means it's receive only and if we pass it as chan<- that means it's send only channel
+
+```go
+func receiverOnlyChan(res <-chan int) {
+    for range res {
+        fmt.Println("receive only cannot send to res")
+    }
+    // res <-5 not possible in this func scope
+}
+
+func sendOnlyChan(sen chan<- int) {
+    for i := range 10 {
+        sen <-i
+    }
+    // i <-res not possible in this func scope
+}
+```
