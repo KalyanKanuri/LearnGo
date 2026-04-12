@@ -162,6 +162,12 @@ func main() {
 	// Embedding in Go
 	core.EmbeddingInGo()
 
+	// Context in Go
+	core.ContextInGo()
+
+	// Flag pkg in Go
+	core.FlagPkgInGo()
+
 	// 5th Project Bank Account Manager
 	fmt.Println("\n******* Bank Account Manager *******")
 	bankaccounts.AccManager()
@@ -182,6 +188,8 @@ func main() {
 	concurrency.MutexInGo()
 	concurrency.WorkerPoolInGo()
 	concurrency.WorkerPoolV2()
+	concurrency.FanOutFanInPatternGo()
+	concurrency.PipelinePatternGo()
 
 	// 6th Project Concurrent File Downloader
 	fmt.Println("\n******* Concurrent File Downloader *******")
@@ -218,6 +226,4 @@ func main() {
 	dbms.TxnInGo(db)
 	dbms.ReadFromUserDetails(db)
 	repopattern.RepoPatternInGo()
-
-	core.ContextInGo()
 }
