@@ -2,6 +2,7 @@ package main
 
 import (
 	"coreconcepts/concepts"
+	"coreconcepts/concepts/funcs"
 	"fmt"
 )
 
@@ -22,7 +23,20 @@ func main() {
 	concepts.StructsInGo()
 	fmt.Println()
 
-	fmt.Println("GoTo Statement in go")
+	fmt.Println("***** GoTo Statement in Go *****")
 	concepts.GoToStatement()
 	fmt.Println()
+
+	fmt.Println("***** Variadic Functions In Go *****")
+	funcs.VariadicFunc(1, 2, 3, 4, 5)
+	funcs.VariadicFunc()
+	fmt.Println()
+
+	fmt.Println("***** Anonymous Functions In Go *****")
+	funcs.AnonymousFunc()
+	fmt.Println()
+
+	fmt.Println("***** Closures In Go *****")
+	funcs.Closures()
+	fmt.Println("")
 }
