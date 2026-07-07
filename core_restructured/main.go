@@ -39,4 +39,12 @@ func main() {
 	fmt.Println("***** Closures In Go *****")
 	funcs.Closures()
 	fmt.Println("")
+
+	fmt.Println("***** Interfaces In Go *****")
+	concepts.InterfacesInGo()
+	fmt.Println()
+
+	fmt.Println("***** Generics In Go *****")
+	concepts.GenericsInGo()
+	fmt.Println()
 }
