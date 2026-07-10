@@ -47,4 +47,8 @@ func main() {
 	fmt.Println("***** Generics In Go *****")
 	concepts.GenericsInGo()
 	fmt.Println()
+
+	fmt.Println("***** Error handling In Go *****")
+	concepts.ErrorHandlingInGo()
+	fmt.Println()
 }
