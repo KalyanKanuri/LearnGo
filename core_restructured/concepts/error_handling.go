@@ -45,21 +45,21 @@ func errorsAsExample() error {
 func ErrorHandlingInGo() {
 	err := validateData()
 	if err != nil {
-		fmt.Printf("Error Processing Data %+v", err)
+		fmt.Printf("Error Processing Data %+v\n", err)
 	}
 
 	err = wrapErrorExample()
 	if err != nil {
-		fmt.Printf("Wrap example %+v", err)
+		fmt.Printf("Wrap example %+v\n", err)
 	}
 
 	err = errorsIsExample()
 	if errors.Is(err, ErrUnauthorized) {
-		fmt.Printf("UnAuthorized, please try re login %+v", err)
+		fmt.Printf("UnAuthorized, please try re login %+v\n", err)
 	}
 
 	err = errorsAsExample()
 	if validationError, ok := errors.AsType[*ValidationError](err); ok {
-		fmt.Printf("Error while validation, %+v", validationError.Field)
+		fmt.Printf("Error while validation, %+v\n", validationError.Field)
 	}
 }
