@@ -18,7 +18,7 @@ func ContextWithDeadline() {
 				return
 			default:
 				fmt.Println("Working with Deadline")
-				time.Sleep(500*time.Millisecond)
+				time.Sleep(500 * time.Millisecond)
 			}
 		}
 	}()

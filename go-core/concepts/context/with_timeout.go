@@ -18,7 +18,7 @@ func ContextWithTimeout() {
 				return
 			default:
 				fmt.Println("Working with Timeout")
-				time.Sleep(500*time.Millisecond)
+				time.Sleep(500 * time.Millisecond)
 			}
 		}
 	}()
