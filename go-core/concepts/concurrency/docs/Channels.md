@@ -4,7 +4,7 @@ Channel is a Data Structure which is provided go, channels is a pipe for the dat
 
 ## UnBuffered Channels
 
-UnBuffered channels are channels which cannot store values pushed by producer, the values pushed by the producer should immediately be consumed by consuemt or else the producer will wait forever until a consumer picks up the value and it results in deadlock
+UnBuffered channels are channels which cannot store values pushed by producer, the values pushed by the producer should immediately be consumed by consumer or else the producer will wait forever until a consumer picks up the value and it results in deadlock
 
 ```go
 // Making an Unbuffered Channel
