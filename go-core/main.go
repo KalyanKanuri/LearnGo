@@ -3,6 +3,7 @@ package main
 import (
 	"coreconcepts/concepts"
 	"coreconcepts/concepts/concurrency"
+	contextGo "coreconcepts/concepts/context"
 	"coreconcepts/concepts/funcs"
 	"fmt"
 )
@@ -73,5 +74,18 @@ func main() {
 
 	fmt.Println("-- Time Case Executor --")
 	concurrency.ExecuteTimeCase()
+	fmt.Println()
+
+	fmt.Println("-- Context in concurrency --")
+	fmt.Println("--- Context With Cancel ---")
+	contextGo.ContextWithCancel()
+	fmt.Println()
+
+	fmt.Println("--- Context With Timeout ---")
+	contextGo.ContextWithTimeout()
+	fmt.Println()
+
+	fmt.Println("--- Context With Deadline ---")
+	contextGo.ContextWithDeadline()
 	fmt.Println()
 }
