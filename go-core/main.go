@@ -70,4 +70,8 @@ func main() {
 	fmt.Println("-- Default Executor --")
 	concurrency.ExecuteDefault()
 	fmt.Println()
+
+	fmt.Println("-- Time Case Executor --")
+	concurrency.ExecuteTimeCase()
+	fmt.Println()
 }
