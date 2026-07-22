@@ -2,6 +2,7 @@ package main
 
 import (
 	"coreconcepts/concepts"
+	"coreconcepts/concepts/concurrency"
 	"coreconcepts/concepts/funcs"
 	"fmt"
 )
@@ -50,5 +51,23 @@ func main() {
 
 	fmt.Println("***** Error handling In Go *****")
 	concepts.ErrorHandlingInGo()
+	fmt.Println()
+
+	fmt.Println("***** Concurrency In Go *****")
+
+	fmt.Println("-- Producer Consumer Pattern --")
+	concurrency.GenerateNums()
+	fmt.Println()
+
+	fmt.Println("-- Squares Pipeline --")
+	concurrency.GenerateSqrs()
+	fmt.Println()
+
+	fmt.Println("-- Select Executor --")
+	concurrency.ExecuteSelect()
+	fmt.Println()
+
+	fmt.Println("-- Default Executor --")
+	concurrency.ExecuteDefault()
 	fmt.Println()
 }
