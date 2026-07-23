@@ -40,4 +40,9 @@ func main() {
 	srtArr2 := []int{2,4,6}
 	mergedArr := twopointers.MergeSortedArrays(srtArr1, srtArr2)
 	fmt.Println(mergedArr)
+
+	fmt.Println("\nSquare And Sort an array")
+	sqrSlc := []int{-4,-1,0,3,10}
+	sortedSqrSlc := twopointers.SortedSquares(sqrSlc)
+	fmt.Println(sortedSqrSlc)
 }
