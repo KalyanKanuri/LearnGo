@@ -3,6 +3,7 @@ package main
 import (
 	"coreconcepts/concepts"
 	"coreconcepts/concepts/concurrency"
+	concpatterns "coreconcepts/concepts/concurrency/patterns"
 	contextGo "coreconcepts/concepts/context"
 	"coreconcepts/concepts/funcs"
 	"fmt"
@@ -88,4 +89,9 @@ func main() {
 	fmt.Println("--- Context With Deadline ---")
 	contextGo.ContextWithDeadline()
 	fmt.Println()
+
+	fmt.Println("***** Concurrency Patterns *****")
+
+	fmt.Println("-- Worker Pool Pattern --")
+	concpatterns.ExecWP()
 }
