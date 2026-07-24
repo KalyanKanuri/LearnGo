@@ -94,4 +94,13 @@ func main() {
 
 	fmt.Println("-- Worker Pool Pattern --")
 	concpatterns.ExecWP()
+	fmt.Println()
+
+	fmt.Println("-- Fan Out Fan In Pattern --")
+	concpatterns.ExecFOFI()
+	fmt.Println()
+
+	fmt.Println("-- Graceful Shutdown --")
+	concpatterns.ExecGSDown()
+	fmt.Println()
 }

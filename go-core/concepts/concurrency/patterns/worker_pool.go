@@ -23,7 +23,7 @@ func ExecWP() {
 	}
 
 	for job := range 5 {
-		jobs <- job+1
+		jobs <- job + 1
 	}
 
 	close(jobs)
