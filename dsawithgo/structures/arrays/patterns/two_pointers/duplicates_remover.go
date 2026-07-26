@@ -12,7 +12,7 @@ func RemoveDuplicates[T comparable](arr *[]T) {
 		if reader == 0 {
 			continue
 		}
-		if (*arr)[reader] != (*arr)[reader -1] {
+		if (*arr)[reader] != (*arr)[reader-1] {
 			(*arr)[writer] = (*arr)[reader]
 			writer++
 		}
