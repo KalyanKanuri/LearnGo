@@ -1,4 +1,4 @@
-package twopointersstr
+package sdwStr
 
 func LongestSubStr2(s string) int {
 	left := 0

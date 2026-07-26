@@ -2,7 +2,7 @@ package main
 
 import (
 	twopointers "dsawithgo/structures/arrays/patterns/two_pointers"
-	twoptrsstr "dsawithgo/structures/strings/patterns/two_pointers"
+	sdwStr "dsawithgo/structures/strings/patterns/sliding_window"
 	"fmt"
 )
 
@@ -50,13 +50,13 @@ func main() {
 	fmt.Println("\nMax Average of a Sub Array")
 	avgSlc := []int{1, 12, -5, -6, 50, 3}
 	maxAvg := twopointers.MaxAvgSubArray(avgSlc, 4)
-	fmt.Printf("Max Average of a sub array in slice %+vis %d\n\n", avgSlc, maxAvg)
+	fmt.Printf("Max Average of a sub array in slice %+vis %.2f\n\n", avgSlc, maxAvg)
 
 	fmt.Println("***** String Patterns in Go *****")
 	subStr := "abcabca"
-	maxLen := twoptrsstr.LongestSubString1(subStr)
+	maxLen := sdwStr.LongestSubString1(subStr)
 	fmt.Printf("Max substring length of string %s is %d\n", subStr, maxLen)
-	maxLen = twoptrsstr.LongestSubStr2(subStr)
+	maxLen = sdwStr.LongestSubStr2(subStr)
 	fmt.Println("Max Sub Str with last idx -- approach 2")
 	fmt.Println(maxLen)
 }
