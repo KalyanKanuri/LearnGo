@@ -56,4 +56,7 @@ func main() {
 	subStr := "abcabca"
 	maxLen := twoptrsstr.LongestSubString1(subStr)
 	fmt.Printf("Max substring length of string %s is %d\n", subStr, maxLen)
+	maxLen = twoptrsstr.LongestSubStr2(subStr)
+	fmt.Println("Max Sub Str with last idx -- approach 2")
+	fmt.Println(maxLen)
 }
