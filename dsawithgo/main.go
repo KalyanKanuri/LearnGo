@@ -2,6 +2,7 @@ package main
 
 import (
 	twopointers "dsawithgo/structures/arrays/patterns/two_pointers"
+	sdwInt "dsawithgo/structures/arrays/patterns/sliding_window"
 	sdwStr "dsawithgo/structures/strings/patterns/sliding_window"
 	"fmt"
 )
@@ -49,7 +50,7 @@ func main() {
 
 	fmt.Println("\nMax Average of a Sub Array")
 	avgSlc := []int{1, 12, -5, -6, 50, 3}
-	maxAvg := twopointers.MaxAvgSubArray(avgSlc, 4)
+	maxAvg := sdwInt.MaxAvgSubArray(avgSlc, 4)
 	fmt.Printf("Max Average of a sub array in slice %+vis %.2f\n\n", avgSlc, maxAvg)
 
 	fmt.Println("***** String Patterns in Go *****")

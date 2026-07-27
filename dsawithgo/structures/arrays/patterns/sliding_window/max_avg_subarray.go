@@ -1,4 +1,4 @@
-package twopointers
+package sdwInt
 
 func MaxAvgSubArray(nums []int, size int) float64 {
 	left := 0
