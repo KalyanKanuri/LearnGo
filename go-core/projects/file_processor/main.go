@@ -47,25 +47,24 @@ func main() {
 		fmt.Println("Error reading directory:", err)
 		return
 	}
+
+	// set the number of workers to the number of CPU cores
+	numWorkers := runtime.NumCPU()
+
+	// initialize worker pool
+	for range numWorkers {
+		wg.Add(1)
+
+		go fileWorker(&wg, jobsQue, resultsQue)
+	}
+
 	for _, file := range files {
 		if file.IsDir() {
 			continue
 		}
 		jobsQue <- JobStruct{FileName: filesDir + "/" + file.Name()}
 	}
-
-	// set the number of workers to the number of CPU cores
-	numWorkers := runtime.NumCPU()
-
-	// initialize worker pool
-	go func() {
-		for range numWorkers {
-			wg.Add(1)
-
-			go fileWorker(&wg, jobsQue, resultsQue)
-		}
-		close(jobsQue)
-	}()
+	close(jobsQue)
 
 	// wait for all workers to finish and close the results channel
 	go func() {
