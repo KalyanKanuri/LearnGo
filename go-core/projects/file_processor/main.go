@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+	"strings"
 	"sync"
 )
 
@@ -21,6 +22,7 @@ func fileWorker(wg *sync.WaitGroup, jobsQue <-chan JobStruct, resultsQue chan<- 
 
 	for job := range jobsQue {
 		fileContent, err := os.ReadFile(job.FileName)
+		words := strings.Fields(string(fileContent))
 		if err != nil {
 			fmt.Println("Error reading file:", err)
 			continue
@@ -28,7 +30,7 @@ func fileWorker(wg *sync.WaitGroup, jobsQue <-chan JobStruct, resultsQue chan<- 
 
 		resultsQue <- ResultStruct{
 			FileName:   job.FileName,
-			WordsCount: len(string(fileContent)),
+			WordsCount: len(words),
 		}
 	}
 }
@@ -56,14 +58,14 @@ func main() {
 	numWorkers := runtime.NumCPU()
 
 	// initialize worker pool
-	for range numWorkers {
-		wg.Add(1)
+	go func() {
+		for range numWorkers {
+			wg.Add(1)
 
-		go func() {
-			fileWorker(&wg, jobsQue, resultsQue)
-		}()
-	}
-	close(jobsQue)
+			go fileWorker(&wg, jobsQue, resultsQue)
+		}
+		close(jobsQue)
+	}()
 
 	// wait for all workers to finish and close the results channel
 	go func() {
