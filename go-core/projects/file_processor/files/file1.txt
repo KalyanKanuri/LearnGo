@@ -1,0 +1,31 @@
+The primary way to read a file in Go depends on your file size and memory requirements: use  to load an entire file into memory quickly, or use  to stream large files line-by-line efficiently. [1, 2, 3]  
+Here is a guide to the three standard patterns for reading files in Go. 
+1. Read the Entire File at Once (Best for Small Files) 
+If your file easily fits into memory, the standard Go os package provides a straightforward function that handles opening and closing the file for you. [2, 3]  
+2. Read Line-by-Line (Best for Large Files or Logs) 
+Loading huge files (gigabytes in size) all at once can crash your application. Using a buffered scanner from the Go bufio package keeps memory consumption low by processing data incrementally. [2, 4, 5, 6, 7]  
+3. Read in Chunks (Best for Binary Data or Exact Sizes) For control over memory usage and precise control over byte loading, use . [1, 2, 8, 9, 10]  
+Quick Comparison Table | Method | Best Used For | Memory Footprint  |
+| --- | --- | --- |
+| — | Small files | High  |
+| — | Large logs, text | Low  |
+| — | Binary data | Controlled  |
+
+If you are dealing with specialized formats (CSV, JSON) or custom delimiters, Go's standard library provides specialized scanners and decoders to handle these scenarios. [11, 12, 13]  
+
+AI responses may include mistakes.
+
+[1] https://gobyexample.com/reading-files
+[2] https://tutorialedge.net/golang/reading-writing-files-in-go/
+[3] https://zetcode.com/golang/readfile/
+[4] https://medium.com/@caring_smitten_gerbil_914/reading-a-text-file-line-by-line-in-go-the-right-way-373baba50ba0
+[5] https://medium.com/@ebsouza/two-ways-to-read-text-files-in-go-16d60101a2ed
+[6] https://accuweb.cloud/resource/articles/how-to-read-file-in-python
+[7] https://blog.devgenius.io/10-ways-to-work-with-large-files-in-python-effortlessly-handle-gigabytes-of-data-aeef19bc0429
+[8] https://www.honeybadger.io/blog/comprehensive-guide-to-file-operations-in-go/
+[9] https://rocketeer.be/blog/2019/11/go-reader-gotchas/
+[10] https://www.htmlgoodies.com/javascript/working-with-binary-files-using-the-javascript-filereader/
+[11] https://codesignal.com/learn/courses/large-data-handling-techniques-in-go/lessons/reading-and-processing-csv-files-in-batches-with-go
+[12] https://blog.gopheracademy.com/advent-2016/advanced-encoding-decoding/
+[13] https://www.youtube.com/watch?v=BHJDCD9kISs
+

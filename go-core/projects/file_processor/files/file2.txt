@@ -1,0 +1,38 @@
+HPNow -  HP Anyware  On-Demand Management Portal
+Report Issue
+Help
+Contact
+Kalyan Kanuri
+My Desktop
+
+Auth ID
+
+Email
+
+Device Name
+
+Region
+
+: KaKa689
+
+: kalyan.kanuri1@hp.com
+
+: CPC-kalya-CATAQ
+
+: Central India AADJ PROD
+
+Service Plan
+
+Connection State
+
+Last login date
+
+Status
+
+: Cloud PC Enterprise 2vCPU/8GB/128GB
+
+:
+
+:
+
+: provisioned
