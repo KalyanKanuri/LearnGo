@@ -4,6 +4,7 @@ import (
 	"fmt"
 	twopointers "revisedsa/two_pointers"
 	threepointers "revisedsa/three_pointers"
+	slidingwindow "revisedsa/sliding_window"
 )
 
 func main() {
@@ -45,4 +46,19 @@ func main() {
 	sqrs := []int{-4,-2,0,5,6}
 	sqrd := threepointers.SortSquares(sqrs)
 	fmt.Println(sqrd)
+
+	fmt.Println("Is Palindrome")
+	pals := []int{1,2,3,2,1}
+	isPal := twopointers.IsPalindrome(pals)
+	fmt.Println(isPal)
+
+	fmt.Println("Max Average Sub Array")
+	avgS := []int{1,2,3,4,5,6,2,1,10,12}
+	maxAvg := slidingwindow.MaxAvgSubArray(avgS, 4)
+	fmt.Println(maxAvg)
+
+	fmt.Println("Longest Sub String")
+	subStr := "abcababcc"
+	longSubStr := slidingwindow.LongestSubString(subStr)
+	fmt.Println(longSubStr)
 }
