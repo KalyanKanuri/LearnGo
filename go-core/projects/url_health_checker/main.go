@@ -19,8 +19,16 @@ type Result struct {
 	Err        error
 }
 
-func printSummary(results <-chan Result) {
-	fmt.Println("======= Summary =======")
+type ResultSummary struct {
+	TotalURLs      int
+	Healthy        int
+	Failed         int
+	AverageLatency time.Duration
+	Slowest        string
+	Fastest        string
+}
+
+func resultAggregator(results <-chan Result) ResultSummary {
 	totalUrls := 0
 	healthy := 0
 	failed := 0
@@ -55,15 +63,14 @@ func printSummary(results <-chan Result) {
 		avgLatency = totalLatency / time.Duration(totalUrls)
 	}
 
-	fmt.Printf(
-		"Total URLs        : %d\n"+
-			"Healthy           : %d\n"+
-			"Failed            : %d\n"+
-			"Average Latency   : %v\n"+
-			"Slowest           : %s\n"+
-			"Fastest           : %s\n",
-		totalUrls, healthy, failed, avgLatency, slowest, fastest,
-	)
+	return ResultSummary{
+		TotalURLs:      totalUrls,
+		Healthy:        healthy,
+		Failed:         failed,
+		AverageLatency: avgLatency,
+		Slowest:        slowest,
+		Fastest:        fastest,
+	}
 }
 
 func main() {
@@ -104,5 +111,17 @@ func main() {
 		close(results)
 	}()
 
-	printSummary(results)
+	summary := resultAggregator(results)
+	fmt.Println("======= Summary =======")
+	fmt.Printf(
+		"Total URLs 		:%d\n"+
+			"Healthy 		:%d\n"+
+			"Failed 			:%d\n"+
+			"Average Latency 	:%v\n"+
+			"Slowest 		:%s\n"+
+			"Fastest 		:%s\n",
+		summary.TotalURLs, summary.Healthy,
+		summary.Failed, summary.AverageLatency,
+		summary.Slowest, summary.Fastest,
+	)
 }
