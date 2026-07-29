@@ -17,13 +17,7 @@ func Worker(ctx context.Context, wg *sync.WaitGroup, jobs <-chan Job, results ch
 				return
 			}
 			resp := HealthChecker(ctx, job.URL)
-
-			result := Result{
-				URL:        job.URL,
-				StatusCode: resp.StatusCode,
-				Err:        resp.Err,
-			}
-			results <- result
+			results <- resp
 		}
 	}
 }

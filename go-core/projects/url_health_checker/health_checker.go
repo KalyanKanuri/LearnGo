@@ -24,7 +24,7 @@ func HealthChecker(ctx context.Context, url string) Result {
 	if err != nil {
 		return Result{
 			URL:        url,
-			StatusCode: req.Response.StatusCode,
+			StatusCode: 0,
 			Latency:    time.Since(startTime),
 			Err:        err,
 		}

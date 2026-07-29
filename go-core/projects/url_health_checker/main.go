@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"math"
 	"sync"
 	"time"
 )
@@ -23,15 +24,14 @@ func printSummary(results <-chan Result) {
 	totalUrls := 0
 	healthy := 0
 	failed := 0
-	var totalLatency time.Duration
-	var avgLatency time.Duration
 	slowest := ""
 	fastest := ""
 	maxLatency := 0
-	minLatency := 0
+	var totalLatency time.Duration
+	var avgLatency time.Duration
+	minLatency := time.Duration(math.MaxInt64)
 
 	for res := range results {
-		fmt.Println(res)
 		totalUrls++
 		if res.StatusCode == 200 {
 			healthy++
@@ -46,11 +46,14 @@ func printSummary(results <-chan Result) {
 		}
 
 		if res.Latency < time.Duration(minLatency) {
-			minLatency = int(res.Latency)
+			minLatency = res.Latency
 			fastest = res.URL
 		}
 	}
-	avgLatency += totalLatency / time.Duration(totalUrls)
+
+	if totalUrls != 0 {
+		avgLatency = totalLatency / time.Duration(totalUrls)
+	}
 
 	fmt.Printf(
 		"Total URLs        : %d\n"+
@@ -73,7 +76,6 @@ func main() {
 	jobs := make(chan Job)
 	results := make(chan Result)
 	var wg sync.WaitGroup
-	numWorkers := 6
 
 	urls := []string{
 		"https://google.com",
@@ -82,6 +84,7 @@ func main() {
 		"https://golang.org",
 	}
 
+	numWorkers := min(len(urls), 8)
 	for range numWorkers {
 		wg.Add(1)
 		go Worker(ctx, &wg, jobs, results)
