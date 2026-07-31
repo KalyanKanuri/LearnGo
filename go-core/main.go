@@ -6,6 +6,7 @@ import (
 	concpatterns "coreconcepts/concepts/concurrency/patterns"
 	contextGo "coreconcepts/concepts/context"
 	"coreconcepts/concepts/funcs"
+	"coreconcepts/concepts/packages/bufiopkg"
 	"coreconcepts/concepts/packages/iopkg"
 	"coreconcepts/concepts/packages/ospkg"
 	"fmt"
@@ -111,10 +112,14 @@ func main() {
 	fmt.Println("-- OS Package --")
 	ospkg.ExecOSSim()
 
-	fmt.Println("IO Package")
+	fmt.Println("-- IO Package --")
 	file, err := os.Open("notes.txt")
 	if err != nil {
 		fmt.Println(err)
 	}
 	iopkg.IOReader(file)
+	file.Seek(0, 0) // reposition the internal cursor at cpu level in the file
+
+	fmt.Println("-- Bufio Package --")
+	bufiopkg.ReadFunc(file)
 }

@@ -1,0 +1,5 @@
+package bufiopkg
+
+func ReadByteFunc() {
+	
+}
