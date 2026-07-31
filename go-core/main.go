@@ -122,6 +122,26 @@ func main() {
 
 	fmt.Println("-- Bufio Package --")
 	bufiopkg.ReadFunc(file)
-	file.Seek(0,0)
+	file.Seek(0, 0)
 	bufiopkg.ReadByteFunc(file)
+	file.Seek(0, 0)
+	bufiopkg.ReadRuneFunc(file)
+	file.Seek(0, 0)
+	bufiopkg.ReadStringFunc(file)
+	file.Seek(0, 0)
+	bufiopkg.ReadBytesFunc(file)
+	file.Seek(0, 0)
+	bufiopkg.PeekFunc(file)
+	file.Seek(0, 0)
+	bufiopkg.DiscardFunc(file)
+	wFile, err := os.OpenFile("output.txt", os.O_CREATE, 0777)
+	if err != nil {
+		fmt.Println("Error opening file", err)
+		return
+	}
+	defer wFile.Close()
+	bufiopkg.WriteFunc(wFile)
+	bufiopkg.WriteStringFunc(wFile)
+	bufiopkg.WriteByteFunc(wFile)
+	bufiopkg.WriteRuneFunc(wFile)
 }
