@@ -6,7 +6,10 @@ import (
 	concpatterns "coreconcepts/concepts/concurrency/patterns"
 	contextGo "coreconcepts/concepts/context"
 	"coreconcepts/concepts/funcs"
+	"coreconcepts/concepts/packages/iopkg"
+	"coreconcepts/concepts/packages/ospkg"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -103,4 +106,15 @@ func main() {
 	fmt.Println("-- Graceful Shutdown --")
 	concpatterns.ExecGSDown()
 	fmt.Println()
+
+	fmt.Println("***** Packages In Go *****")
+	fmt.Println("-- OS Package --")
+	ospkg.ExecOSSim()
+
+	fmt.Println("IO Package")
+	file, err := os.Open("notes.txt")
+	if err != nil {
+		fmt.Println(err)
+	}
+	iopkg.IOReader(file)
 }
