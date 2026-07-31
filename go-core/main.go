@@ -122,4 +122,6 @@ func main() {
 
 	fmt.Println("-- Bufio Package --")
 	bufiopkg.ReadFunc(file)
+	file.Seek(0,0)
+	bufiopkg.ReadByteFunc(file)
 }

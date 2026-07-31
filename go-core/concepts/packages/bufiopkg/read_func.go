@@ -13,11 +13,11 @@ func ReadFunc(bufread io.Reader) {
 	bytesRead, err := reader.Read(buf)
 	if err != nil {
 		if err == io.EOF {
-			fmt.Println(string(buf[:bytesRead]))
+			fmt.Println("bufio.Read()", string(buf[:bytesRead]))
 			return
 		}
 		fmt.Println("Error reading file", err)
 		return
 	}
-	fmt.Println(string(buf[:bytesRead]))
+	fmt.Println("bufio.Read()", string(buf[:bytesRead]))
 }

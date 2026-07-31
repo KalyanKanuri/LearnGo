@@ -30,5 +30,5 @@ func ExecOSSim() {
 		return
 	}
 
-	fmt.Println(string(buf[:bytesRead]))
+	fmt.Println("os.Read()", string(buf[:bytesRead]))
 }

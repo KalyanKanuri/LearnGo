@@ -15,5 +15,5 @@ func IOReader(source io.Reader) {
 		}
 		fmt.Println("Error reading bytes", err)
 	}
-	fmt.Println(string(buf[:bytesRead]))
+	fmt.Println("io.Read()", string(buf[:bytesRead]))
 }
