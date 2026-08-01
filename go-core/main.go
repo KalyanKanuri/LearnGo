@@ -146,8 +146,8 @@ func main() {
 	bufiopkg.WriteRuneFunc(wFile)
 	bufiopkg.BufAvailable(wFile)
 	bufiopkg.BufBuffered(wFile)
-	wFile.Seek(0,0)
+	wFile.Seek(0, 0)
 	bufiopkg.BufScanner(wFile)
-	wFile.Seek(0,0)
+	wFile.Seek(0, 0)
 	bufiopkg.BufSplit(wFile)
 }
