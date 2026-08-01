@@ -1,0 +1,6 @@
+2026-08-01 22:00:00 INFO User userID=4921 successfully logged in from IP 192.0.2.4
+2026-08-01 22:15:30 INFO Order status updated to 'SHIPPED' for orderID=99281
+2026-08-01 22:16:02 INFO Cache background refresh completed successfully in 142ms
+2026-08-01 22:20:15 ERROR FileNotFoundError: Could not open configuration file at path /etc/app/config.json
+2026-08-01 22:05:12 WARN Database connection pool is at 85% capacity (85/100 connections used)
+2026-08-01 22:10:45 ERROR Failed to process payment for orderID=99281: Gateway timeout after 5000ms
