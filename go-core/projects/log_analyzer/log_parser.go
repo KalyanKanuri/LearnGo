@@ -7,28 +7,40 @@ import (
 	"strings"
 )
 
-func ParseLogLines(file io.Reader) map[string]int {
+func ParseLogLines(file io.Reader) (LogSummary, error) {
 	scanner := bufio.NewScanner(file)
 	lineCount := 0
-	logData := make(map[string]int)
+	logSummary := LogSummary{
+		TotalLines: lineCount,
+		INFO:       0,
+		WARN:       0,
+		ERROR:      0,
+	}
 
 	for scanner.Scan() {
 		line := scanner.Text()
 		lineCount++
 		logFields := strings.Fields(line)
+		level := logFields[2]
 
 		if len(logFields) < 3 {
-			fmt.Printf("Skipping malformed line at %d", lineCount)
+			fmt.Printf("Skipping malformed line at %d: %s", lineCount, line)
 			continue
 		}
 
-		logData[logFields[2]]++
+		switch level {
+		case "INFO":
+			logSummary.INFO++
+		case "WARN":
+			logSummary.WARN++
+		case "ERROR":
+			logSummary.ERROR++
+		}
 	}
-	logData["totalLines"] = lineCount
 
 	if err := scanner.Err(); err != nil {
-		fmt.Println("Error scanning file", err)
-		return map[string]int{}
+		return LogSummary{}, err
 	}
-	return logData
+
+	return logSummary, nil
 }

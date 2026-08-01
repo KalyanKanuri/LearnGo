@@ -12,16 +12,6 @@ type LogSummary struct {
 	ERROR      int
 }
 
-func buildSummary(logData map[string]int) LogSummary {
-	logSummary := LogSummary{
-		TotalLines: logData["totalLines"],
-		INFO:       logData["INFO"],
-		WARN:       logData["WARN"],
-		ERROR:      logData["ERROR"],
-	}
-	return logSummary
-}
-
 func main() {
 	file, err := os.Open("logfile.log")
 	if err != nil {
@@ -30,10 +20,12 @@ func main() {
 	}
 	defer file.Close()
 
-	logData := ParseLogLines(file)
+	logSummary, err := ParseLogLines(file)
+	if err != nil {
+		fmt.Println("Error Parsing log file", err)
+	}
 
 	fmt.Println("============ Log Summary ============")
-	logSummary := buildSummary(logData)
 	fmt.Printf(
 		"\nTotal Lines: %d\n\nInfo:%d\nWarn:%d\nError:%d\n\n",
 		logSummary.TotalLines, logSummary.INFO, logSummary.WARN, logSummary.ERROR,
