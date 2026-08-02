@@ -9,24 +9,18 @@ import (
 
 func ParseLogLines(file io.Reader) (LogSummary, error) {
 	scanner := bufio.NewScanner(file)
-	lineCount := 0
-	logSummary := LogSummary{
-		TotalLines: lineCount,
-		INFO:       0,
-		WARN:       0,
-		ERROR:      0,
-	}
+	var logSummary LogSummary
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		lineCount++
+		logSummary.TotalLines++
 		logFields := strings.Fields(line)
-		level := logFields[2]
 
 		if len(logFields) < 3 {
-			fmt.Printf("Skipping malformed line at %d: %s", lineCount, line)
+			fmt.Printf("Skipping malformed line at %d: %s", logSummary.TotalLines, line)
 			continue
 		}
+		level := logFields[2]
 
 		switch level {
 		case "INFO":

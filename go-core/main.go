@@ -7,6 +7,7 @@ import (
 	contextGo "coreconcepts/concepts/context"
 	"coreconcepts/concepts/funcs"
 	"coreconcepts/concepts/packages/bufiopkg"
+	"coreconcepts/concepts/packages/filepathpkg"
 	"coreconcepts/concepts/packages/iopkg"
 	"coreconcepts/concepts/packages/ospkg"
 	"fmt"
@@ -150,4 +151,11 @@ func main() {
 	bufiopkg.BufScanner(wFile)
 	wFile.Seek(0, 0)
 	bufiopkg.BufSplit(wFile)
+
+	fmt.Println("-- File path Package --")
+	filepathpkg.FilePathJoin("app.log")
+	filepathpkg.FilePathDir("/var/app/logs/2026/app.log")
+	filepathpkg.FilePathBase("/var/app/logs/2026/app.log")
+	filepathpkg.FilePathExt("/var/app/logs/2026/app.log")
+	filepathpkg.FilePathClean("/logs/../logs/./server/app.log")
 }

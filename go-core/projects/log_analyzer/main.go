@@ -23,6 +23,7 @@ func main() {
 	logSummary, err := ParseLogLines(file)
 	if err != nil {
 		fmt.Println("Error Parsing log file", err)
+		return
 	}
 
 	fmt.Println("============ Log Summary ============")
