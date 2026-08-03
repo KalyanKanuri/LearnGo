@@ -28,9 +28,17 @@ func FilePathClean(path string) {
 }
 
 func FilePathWalkDir(path string) {
+	err := filepath.WalkDir(path, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
 
-	filepath.WalkDir(path, func(path string, d fs.DirEntry, err error) error {
+		if filepath.Ext(d.Name()) == ".go" {
+			fmt.Println("filepath.WalkDir()", d.Name())
+		}
 		return nil
 	})
-
+	if err != nil {
+		fmt.Println("Error Walking path", err)
+	}
 }

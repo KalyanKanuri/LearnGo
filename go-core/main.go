@@ -158,4 +158,5 @@ func main() {
 	filepathpkg.FilePathBase("/var/app/logs/2026/app.log")
 	filepathpkg.FilePathExt("/var/app/logs/2026/app.log")
 	filepathpkg.FilePathClean("/logs/../logs/./server/app.log")
+	filepathpkg.FilePathWalkDir("./projects")
 }
