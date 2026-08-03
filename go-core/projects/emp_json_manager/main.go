@@ -39,4 +39,26 @@ func main() {
 		)
 	}
 	fmt.Println("==========================================")
+
+	newEmp := Employee{
+		Name: "Das",
+		Age:  29,
+		Address: Address{
+			City:    "Hyderabad",
+			Country: "India",
+		},
+		Skills: []string{"React", "Next JS"},
+	}
+	emps = append(emps, newEmp)
+
+	empsJson, err := json.MarshalIndent(emps, "", "	")
+	if err != nil {
+		fmt.Println("Error marshalling json", err)
+		return
+	}
+	err = os.WriteFile("employees.json", empsJson, 0777)
+	if err != nil {
+		fmt.Println("Error writing to file", err)
+		return
+	}
 }
