@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Alice",
+        "age": 25,
+        "address": {
+            "city": "Hyderabad",
+            "country": "India"
+        },
+        "skills": [
+            "Go",
+            "Docker"
+        ]
+    },
+    {
+        "name": "Bob",
+        "age": 30,
+        "address": {
+            "city": "Bengaluru",
+            "country": "India"
+        },
+        "skills": [
+            "PostgreSQL",
+            "Linux"
+        ]
+    },
+    {
+        "name": "Das",
+        "age": 29,
+        "address": {
+            "city": "Hyderabad",
+            "country": "India"
+        },
+        "skills": [
+            "React",
+            "Next JS"
+        ]
+    },
+    {
+        "name": "Das",
+        "age": 29,
+        "address": {
+            "city": "Hyderabad",
+            "country": "India"
+        },
+        "skills": [
+            "React",
+            "Next JS"
+        ]
+    },
+    {
+        "name": "Das",
+        "age": 29,
+        "address": {
+            "city": "Hyderabad",
+            "country": "India"
+        },
+        "skills": [
+            "React",
+            "Next JS"
+        ]
+    },
+    {
+        "name": "Das",
+        "age": 29,
+        "address": {
+            "city": "Hyderabad",
+            "country": "India"
+        },
+        "skills": [
+            "React",
+            "Next JS"
+        ]
+    }
+]
