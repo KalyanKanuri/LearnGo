@@ -1,8 +1,9 @@
 package main
 
 import (
-	twopointers "dsawithgo/structures/arrays/patterns/two_pointers"
+	"dsawithgo/search"
 	sdwInt "dsawithgo/structures/arrays/patterns/sliding_window"
+	twopointers "dsawithgo/structures/arrays/patterns/two_pointers"
 	sdwStr "dsawithgo/structures/strings/patterns/sliding_window"
 	"fmt"
 )
@@ -60,4 +61,14 @@ func main() {
 	maxLen = sdwStr.LongestSubStr2(subStr)
 	fmt.Println("Max Sub Str with last idx -- approach 2")
 	fmt.Println(maxLen)
+
+	fmt.Println("***** Search Algorithms *****")
+	binSrch := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	binTrgt := 7
+	binPos := search.BinarySearch(binSrch, binTrgt)
+	if binPos != -1 {
+		fmt.Println("Target found at", binPos)
+	} else {
+		fmt.Println("Target not found")
+	}
 }
