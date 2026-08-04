@@ -7,6 +7,7 @@ import (
 	contextGo "coreconcepts/concepts/context"
 	"coreconcepts/concepts/funcs"
 	"coreconcepts/concepts/packages/bufiopkg"
+	"coreconcepts/concepts/packages/encoding/jsonpkg"
 	"coreconcepts/concepts/packages/filepathpkg"
 	"coreconcepts/concepts/packages/iopkg"
 	"coreconcepts/concepts/packages/ospkg"
@@ -159,4 +160,9 @@ func main() {
 	filepathpkg.FilePathExt("/var/app/logs/2026/app.log")
 	filepathpkg.FilePathClean("/logs/../logs/./server/app.log")
 	filepathpkg.FilePathWalkDir("./projects")
+
+	fmt.Println("-- encoding/json package --")
+	jsonpkg.DoMarshal()
+	jsonpkg.DoUnMarshal()
+	jsonpkg.DoMarhsalIndent()
 }
