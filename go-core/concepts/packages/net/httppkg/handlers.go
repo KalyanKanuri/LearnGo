@@ -5,7 +5,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sync"
 )
+
+var mu sync.Mutex
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	resp := "Hello, Backend Engineering!"
@@ -17,46 +20,78 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func employeeHandler(w http.ResponseWriter, r *http.Request) {
-	var emps []Employee
-	empBytes, err := LoadEmployees("employees.json")
-	if err != nil {
-		fmt.Println("Error loading employees", err)
-		w.Write([]byte("Error loading employees"))
-		return
-	}
-
-	err = json.Unmarshal(empBytes, &emps)
-	if err != nil {
-		fmt.Println("Error loading employees", err)
-		w.Write([]byte("Error loading employees"))
-		return
-	}
-
 	switch r.Method {
 	case http.MethodGet:
-		w.Write(empBytes)
+		emps, err := LoadEmployees("employees.json")
+		if err != nil {
+			fmt.Println("Error loading employees", err)
+			http.Error(
+				w,
+				"Internal Server Error",
+				http.StatusInternalServerError,
+			)
+		}
+
+		empResp, err := json.MarshalIndent(emps, "", "	")
+		if err != nil {
+			fmt.Println("Error marshalling employees", err)
+			http.Error(
+				w,
+				"Internal Server Error",
+				http.StatusInternalServerError,
+			)
+		}
+		w.Write(empResp)
 	case http.MethodPost:
+		mu.Lock()
 		bodyBytes, err := io.ReadAll(r.Body)
 		fmt.Printf("Post Employees -> Request Body: %s\n", string(bodyBytes))
 		if err != nil {
 			fmt.Println("Error reading request body", err)
-			w.Write([]byte("Error reading request body"))
+			http.Error(
+				w,
+				"Bad request",
+				http.StatusBadRequest,
+			)
 			return
 		}
+
+		emps, err := LoadEmployees("employees.json")
+		if err != nil {
+			fmt.Println("Error loading employees", err)
+			http.Error(
+				w,
+				"Internal Server Error",
+				http.StatusInternalServerError,
+			)
+			return
+		}
+
 		var newEmp Employee
 		err = json.Unmarshal(bodyBytes, &newEmp)
 		if err != nil {
-			fmt.Println("Error unmarshalling json", err)
-			w.Write([]byte("Error unmarshalling json"))
+			fmt.Println("Error unmarshalling new employee", err)
+			http.Error(
+				w,
+				"Internal Server Error",
+				http.StatusInternalServerError,
+			)
 			return
 		}
+
 		emps = append(emps, newEmp)
-		newEmpBytes, err := SaveEmployees("employees.json", emps)
+		err = SaveEmployees("employees.json", emps)
 		if err != nil {
-			fmt.Println("Error Saving Employees", err)
-			w.Write([]byte("Error saving employees"))
+			fmt.Println("Error Saving employees", err)
+			http.Error(
+				w,
+				"Internal Server Error",
+				http.StatusInternalServerError,
+			)
 			return
 		}
-		w.Write(newEmpBytes)
+
+		fmt.Fprintf(w, "New Employee Created Successfully %s\n", newEmp.Name)
+		mu.Unlock()
 	}
 }

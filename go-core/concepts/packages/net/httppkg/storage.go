@@ -5,23 +5,29 @@ import (
 	"os"
 )
 
-func LoadEmployees(filename string) ([]byte, error) {
+func LoadEmployees(filename string) ([]Employee, error) {
+	var emps []Employee
 	empBytes, err := os.ReadFile(filename)
 	if err != nil {
-		return []byte{}, err
+		return []Employee{}, err
 	}
-	return empBytes, err
+
+	err = json.Unmarshal(empBytes, &emps)
+	if err != nil {
+		return []Employee{}, err
+	}
+	return emps, err
 }
 
-func SaveEmployees(filename string, emps []Employee) ([]byte, error) {
+func SaveEmployees(filename string, emps []Employee) error {
 	empBytes, err := json.MarshalIndent(emps, "", "	")
 	if err != nil {
-		return empBytes, err
+		return err
 	}
 
 	err = os.WriteFile(filename, empBytes, 0644)
 	if err != nil {
-		return []byte{}, err
+		return err
 	}
-	return empBytes, nil
+	return nil
 }
