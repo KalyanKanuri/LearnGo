@@ -30,6 +30,7 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 				"Internal Server Error",
 				http.StatusInternalServerError,
 			)
+			return
 		}
 
 		empResp, err := json.MarshalIndent(emps, "", "	")
@@ -40,11 +41,16 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 				"Internal Server Error",
 				http.StatusInternalServerError,
 			)
+			return
 		}
 		w.Write(empResp)
 	case http.MethodPost:
 		mu.Lock()
+		defer mu.Unlock()
+
 		bodyBytes, err := io.ReadAll(r.Body)
+		defer r.Body.Close()
+
 		fmt.Printf("Post Employees -> Request Body: %s\n", string(bodyBytes))
 		if err != nil {
 			fmt.Println("Error reading request body", err)
@@ -92,6 +98,5 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 		}
 
 		fmt.Fprintf(w, "New Employee Created Successfully %s\n", newEmp.Name)
-		mu.Unlock()
 	}
 }
