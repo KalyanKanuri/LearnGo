@@ -13,10 +13,13 @@ var mu sync.Mutex
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	resp := "Hello, Backend Engineering!"
 	_, err := w.Write([]byte(resp))
+	http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	if err != nil {
 		fmt.Println("Error writing response to network", err)
 		return
 	}
+	// this is to understand how recovery middleware works uncomment below to visualize
+	//panic("Intentional panic for testing RecoveryMiddleware")
 }
 
 func employeeHandler(w http.ResponseWriter, r *http.Request) {
@@ -43,6 +46,7 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			)
 			return
 		}
+		w.WriteHeader(200)
 		w.Write(empResp)
 	case http.MethodPost:
 		mu.Lock()
