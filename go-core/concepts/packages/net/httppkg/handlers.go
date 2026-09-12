@@ -49,13 +49,9 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
 		w.Write(empResp)
 	case http.MethodPost:
-		mu.Lock()
-		defer mu.Unlock()
-
 		bodyBytes, err := io.ReadAll(r.Body)
 		defer r.Body.Close()
 
-		fmt.Printf("Post Employees -> Request Body: %s\n", string(bodyBytes))
 		if err != nil {
 			fmt.Println("Error reading request body", err)
 			http.Error(
@@ -65,7 +61,33 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			)
 			return
 		}
+		fmt.Printf("Post Employees -> Request Body: %s\n", string(bodyBytes))
 
+		var empReq EmployeeRequest
+		err = json.Unmarshal(bodyBytes, &empReq)
+		if err != nil {
+			fmt.Println("Error unmarshalling new employee", err)
+			http.Error(
+				w,
+				"Bad Request",
+				http.StatusBadRequest,
+			)
+			return
+		}
+
+		err = ValidateEmployeeRequest(empReq)
+		if err != nil {
+			fmt.Println("Error in Request body", err)
+			http.Error(
+				w,
+				"Bad Request",
+				http.StatusBadRequest,
+			)
+			return
+		}
+
+		mu.Lock()
+		defer mu.Unlock()
 		emps, err := LoadEmployees("employees.json")
 		if err != nil {
 			fmt.Println("Error loading employees", err)
@@ -77,18 +99,7 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		var newEmp Employee
-		err = json.Unmarshal(bodyBytes, &newEmp)
-		if err != nil {
-			fmt.Println("Error unmarshalling new employee", err)
-			http.Error(
-				w,
-				"Internal Server Error",
-				http.StatusInternalServerError,
-			)
-			return
-		}
-
+		newEmp := toEmployee(empReq)
 		emps = append(emps, newEmp)
 		err = SaveEmployees("employees.json", emps)
 		if err != nil {
@@ -101,6 +112,7 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		w.WriteHeader(201)
 		fmt.Fprintf(w, "New Employee Created Successfully %s\n", newEmp.Name)
 	}
 }

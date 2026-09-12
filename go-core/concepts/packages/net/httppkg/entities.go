@@ -11,3 +11,10 @@ type Employee struct {
 	Address Address
 	Skills  []string
 }
+
+type EmployeeRequest struct {
+	Name    string
+	Age     *int
+	Address Address
+	Skills  []string
+}
