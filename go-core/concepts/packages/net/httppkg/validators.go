@@ -3,12 +3,12 @@ package main
 import "strings"
 
 type FieldError struct {
-	Field   string
-	Message string
+	Field   string `json:"field"`
+	Message string `json:"message"`
 }
 
 type ValidationErrors struct {
-	Errs []FieldError
+	Errs []FieldError `json:"errors"`
 }
 
 func (ve ValidationErrors) Error() string {
@@ -42,7 +42,7 @@ func ValidateEmployeeRequest(req EmployeeRequest) error {
 		if *req.Age < 18 {
 			err := FieldError{
 				Field:   "age",
-				Message: "must be atleast 18",
+				Message: "must be at least 18",
 			}
 			fes = append(fes, err)
 		}

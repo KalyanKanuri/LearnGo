@@ -46,5 +46,18 @@
 			"Python",
 			"AI/ML"
 		]
+	},
+	{
+		"Name": "kalyan",
+		"Age": 26,
+		"Address": {
+			"City": "HYD",
+			"Country": "IND"
+		},
+		"Skills": [
+			"Go",
+			"Git",
+			"Linux"
+		]
 	}
 ]

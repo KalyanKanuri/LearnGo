@@ -11,11 +11,15 @@ import (
 var mu sync.Mutex
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	resp := "Hello, Backend Engineering!"
+	resp := "Hello, Backend Engineer!"
 	_, err := w.Write([]byte(resp))
-	http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	if err != nil {
 		fmt.Println("Error writing response to network", err)
+		http.Error(
+			w,
+			"Internal Server Error",
+			http.StatusInternalServerError,
+		)
 		return
 	}
 	// this is to understand how recovery middleware works uncomment below to visualize
@@ -36,7 +40,7 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		empResp, err := json.MarshalIndent(emps, "", "	")
+		empResp, err := json.MarshalIndent(emps, "", " ")
 		if err != nil {
 			fmt.Println("Error marshalling employees", err)
 			http.Error(
@@ -46,27 +50,28 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			)
 			return
 		}
-		w.WriteHeader(200)
+		w.WriteHeader(http.StatusOK)
 		w.Write(empResp)
 	case http.MethodPost:
-		bodyBytes, err := io.ReadAll(r.Body)
+		reqDecoder := json.NewDecoder(r.Body)
 		defer r.Body.Close()
 
+		var empReq EmployeeRequest
+		err := reqDecoder.Decode(&empReq)
 		if err != nil {
-			fmt.Println("Error reading request body", err)
+			fmt.Println("Error Decoding request body", err)
 			http.Error(
 				w,
-				"Bad request",
+				"Bad Request",
 				http.StatusBadRequest,
 			)
 			return
 		}
-		fmt.Printf("Post Employees -> Request Body: %s\n", string(bodyBytes))
 
-		var empReq EmployeeRequest
-		err = json.Unmarshal(bodyBytes, &empReq)
-		if err != nil {
-			fmt.Println("Error unmarshalling new employee", err)
+		var extra any
+		err = reqDecoder.Decode(&extra)
+		if err != io.EOF {
+			fmt.Println("Invalid Request Body", extra)
 			http.Error(
 				w,
 				"Bad Request",
@@ -77,6 +82,28 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 
 		err = ValidateEmployeeRequest(empReq)
 		if err != nil {
+			if validationErrs, ok := err.(ValidationErrors); ok {
+				errs := ValidationErrorResponse{
+					Errors: validationErrs.Errs,
+				}
+
+				errResp, err := json.MarshalIndent(errs, "", " ")
+				if err != nil {
+					http.Error(
+						w,
+						"Internal Server Error",
+						http.StatusInternalServerError,
+					)
+					return
+				}
+
+				http.Error(
+					w,
+					string(errResp),
+					http.StatusBadRequest,
+				)
+				return
+			}
 			fmt.Println("Error in Request body", err)
 			http.Error(
 				w,
@@ -85,6 +112,8 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			)
 			return
 		}
+
+		newEmp := toEmployee(empReq)
 
 		mu.Lock()
 		defer mu.Unlock()
@@ -99,7 +128,6 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		newEmp := toEmployee(empReq)
 		emps = append(emps, newEmp)
 		err = SaveEmployees("employees.json", emps)
 		if err != nil {
@@ -112,7 +140,7 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		w.WriteHeader(201)
+		w.WriteHeader(http.StatusCreated)
 		fmt.Fprintf(w, "New Employee Created Successfully %s\n", newEmp.Name)
 	}
 }

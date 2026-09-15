@@ -13,8 +13,12 @@ type Employee struct {
 }
 
 type EmployeeRequest struct {
-	Name    string
-	Age     *int
-	Address Address
-	Skills  []string
+	Name    string   `json:"name" validate:"required"`
+	Age     *int     `json:"age"`
+	Address Address  `json:"address"`
+	Skills  []string `json:"skills"`
+}
+
+type ValidationErrorResponse struct {
+	Errors []FieldError `json:"errors"`
 }
