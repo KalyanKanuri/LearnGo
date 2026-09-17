@@ -6,10 +6,11 @@ type Address struct {
 }
 
 type Employee struct {
-	Name    string
-	Age     int
-	Address Address
-	Skills  []string
+	ID		int		`json:"id"`
+	Name    string	`json:"name"`
+	Age     int     `json:"age"`
+	Address Address `json:"address"`
+	Skills  []string `json:"skills"`
 }
 
 type EmployeeRequest struct {
