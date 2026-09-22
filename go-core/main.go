@@ -11,6 +11,7 @@ import (
 	"coreconcepts/concepts/packages/filepathpkg"
 	"coreconcepts/concepts/packages/iopkg"
 	"coreconcepts/concepts/packages/ospkg"
+	"coreconcepts/concepts/packages/timepkg"
 	"fmt"
 	"os"
 )
@@ -165,4 +166,10 @@ func main() {
 	jsonpkg.DoMarshal()
 	jsonpkg.DoUnMarshal()
 	jsonpkg.DoMarhsalIndent()
+
+	fmt.Println(("-- time package --"))
+	timepkg.ExecTimer()
+	timepkg.ExecTicker()
+	timepkg.ExecTimerTicker()
+	timepkg.TZExecutor()
 }

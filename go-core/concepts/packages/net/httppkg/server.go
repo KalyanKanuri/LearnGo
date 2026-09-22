@@ -9,6 +9,7 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", rootHandler)
 	mux.HandleFunc("/employees", employeeHandler)
+	mux.HandleFunc("/health", healthHandler)
 	err := http.ListenAndServe(
 		":8080",
 		LoggingMiddleware(

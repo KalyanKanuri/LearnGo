@@ -167,7 +167,6 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		
 		resp, err := json.MarshalIndent(newEmp, "", " ")
 		if err != nil {
 			fmt.Println("Error marshalling response", err)
@@ -193,5 +192,31 @@ func employeeHandler(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			fmt.Println("Error writing response to network", err)
 		}
+	}
+}
+
+type HealthStatus struct {
+	DBStatus     string `json:"db_status"`
+	ServerStatus string `json:"server_status"`
+}
+
+func healthHandler(w http.ResponseWriter, r *http.Request) {
+	hs := HealthStatus{
+		DBStatus:     "Healthy",
+		ServerStatus: "Healthy",
+	}
+
+	res, err := json.MarshalIndent(hs, "", " ")
+	if err != nil {
+		fmt.Println("Error creating json response", err)
+		return
+	}
+
+	w.Header().Add("content-type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	_, err = w.Write(res)
+	if err != nil {
+		fmt.Println("Error writing response", err)
+		return
 	}
 }
