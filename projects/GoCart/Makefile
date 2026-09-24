@@ -1,13 +1,15 @@
-.PHONY: help, build, run, run-dev, lint, migrate-up, migrate-down
+.PHONY: help build run run-dev lint migrate-up migrate-down podman-up podman-down
 
 help:
-	@echo "Available commands:"
-	@echo "  build     - Build the project"
-	@echo "  run       - Run the project"
-	@echo "  run-dev   - Run the project in development mode"
-	@echo "  lint      - Lint the project"
-	@echo "  migrate-up - Run database migrations"
-	@echo "  migrate-down - Rollback database migrations"
+	@echo Available commands:
+	@echo  build     		- Build the project
+	@echo  run       		- Run the project
+	@echo  run-dev   		- Run the project in development mode
+	@echo  lint      		- Lint the project
+	@echo  migrate-up 		- Run database migrations
+	@echo  migrate-down 	- Rollback database migrations
+	@echo  podman-up 		- Start Podman containers
+	@echo  podman-down  	- Stop Podman containers
 
 build:
 	@echo "Building the project..."
