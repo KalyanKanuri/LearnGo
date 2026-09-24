@@ -1,4 +1,4 @@
-version: "1"
+version: "2"
 
 run:
   # The default concurrency is a number of available CPUs
@@ -10,17 +10,44 @@ run:
   # Include test files in linting analysis. Default is true.
   tests: true
 
+output:
+  # Choose from: colored-line-number|line-number|json|tab|checkstyle|code-climate|junit-xml|github-actions
+  formats:
+    text:
+      path: stdout
+      colors: true
+      # Print lines of code with a linting issue. Default is true.
+      print-issued-lines: true
+      # Print linter name in the end of line. Default is true.
+      print-linter-name: true
+
 linters:
+  # Disable all linters by default, then explicitly enable what you need
+  default: none
   enable:
     - errcheck # Checks for unchecked errors
-    - gosimple # Suggests code simplifications
     - govet # Reports suspicious constructs (like printf formatting errors)
     - ineffassign # Detects ineffectual assignments
     - staticcheck # Applies massive sets of static analysis checks
     - unused # Finds unused constants, variables, functions, and types
     - revive # Fast, configurable, extensible drop-in replacement for golint
     - gocyclo # Computes and checks cyclomatic complexity of functions
-    - gofmt # Checks whether code was gofmt-ed
+  settings:
+    govet:
+      # Enable analyzers by name
+      enable:
+        - shadow # Warns about shadowed variables
+    gocyclo:
+      # Minimal complexity of function to report. Default is 30.
+      min-complexity: 15
+  exclusions:
+    # Exclude specific code paths from being linted
+    paths:
+      - vendor
+
+formatters:
+  enable:
+    - gofmt # Checks whether code is gofmt-ed
 
 issues:
   # Maximum count of issues with the same text. Set to 0 to disable limit.
