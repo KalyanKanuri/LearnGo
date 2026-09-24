@@ -1,0 +1,29 @@
+version: "1"
+
+run:
+  # The default concurrency is a number of available CPUs
+  concurrency: 4
+  # Timeout for analysis, e.g. 30s, 5m. Default is 1m.
+  timeout: 5m
+  # Exit code when at least one issue was found. Default is 1.
+  issues-exit-code: 1
+  # Include test files in linting analysis. Default is true.
+  tests: true
+
+linters:
+  enable:
+    - errcheck # Checks for unchecked errors
+    - gosimple # Suggests code simplifications
+    - govet # Reports suspicious constructs (like printf formatting errors)
+    - ineffassign # Detects ineffectual assignments
+    - staticcheck # Applies massive sets of static analysis checks
+    - unused # Finds unused constants, variables, functions, and types
+    - revive # Fast, configurable, extensible drop-in replacement for golint
+    - gocyclo # Computes and checks cyclomatic complexity of functions
+    - gofmt # Checks whether code was gofmt-ed
+
+issues:
+  # Maximum count of issues with the same text. Set to 0 to disable limit.
+  max-same-issues: 3
+  # Maximum issues count per linter. Set to 0 to disable limit.
+  max-issues-per-linter: 0

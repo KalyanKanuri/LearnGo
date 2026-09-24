@@ -1,0 +1,45 @@
+services:
+    # app:
+    #     build:
+    #         context: ..
+    #         dockerfile: container/Dockerfile
+    #     container_name: go-cart-app
+    #     ports:
+    #         - "8080:8080"
+    #     environment:
+    #         - DB_HOST=db
+    #         - DB_PORT=5432
+    #         - DB_USER=gcdba
+    #         - DB_PASSWORD=gcpwd
+    #         - DB_NAME=gcdb
+    #     depends_on:
+    #         - db
+
+    db:
+        image: postgres:latest
+        container_name: go-cart-db
+        environment:
+            POSTGRES_USER: gcdba
+            POSTGRES_PASSWORD: gcpwd
+            POSTGRES_DB: gcdb
+        ports:
+            - "5432:5432"
+        volumes:
+            - db_data:/var/lib/postgresql
+
+    localstack:
+        image: localstack/localstack:latest
+        container_name: go-cart-localstack
+        environment:
+            - SERVICES=s3,sqs
+            - DEFAULT_REGION=us-east-1
+            - DEBUG=1
+            - DATA_DIR=/var/lib/localstack/data
+        ports:
+            - "4566:4566"
+        volumes:
+            - localstack_data:/var/lib/localstack/data
+
+volumes:
+    db_data:
+    localstack_data:
