@@ -1,7 +1,7 @@
-// Package config provides functionality to load and manage application configuration from environment variables.
 package config
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 	"time"
@@ -9,7 +9,6 @@ import (
 	"github.com/joho/godotenv"
 )
 
-// Config holds all the configuration settings for the application.
 type Config struct {
 	App    AppConfig
 	DB     DatabaseConfig
@@ -18,97 +17,103 @@ type Config struct {
 	JWT    JWTConfig
 }
 
-// AppConfig holds the configuration for the application.
 type AppConfig struct {
-	AppHost string `env:"APP_HOST" `
-	AppPort string `env:"APP_PORT"`
-	GinMode string `env:"GIN_MODE"`
+	AppHost string
+	AppPort string
+	GinMode string
 }
 
-// UploadConfig holds the configuration for file uploads.
 type UploadConfig struct {
-	MaxUploadSize int64  `env:"MAX_UPLOAD_SIZE"`
-	UploadPath    string `env:"UPLOAD_PATH"`
+	MaxUploadSize int64
+	UploadPath    string
 }
 
-// DatabaseConfig holds the configuration for the database connection.
 type DatabaseConfig struct {
-	DBHost     string `env:"DB_HOST"`
-	DBPort     string `env:"DB_PORT"`
-	DBUser     string `env:"DB_USER"`
-	DBPassword string `env:"DB_PASSWORD"`
-	DBName     string `env:"DB_NAME"`
+	DBHost     string
+	DBPort     string
+	DBUser     string
+	DBPassword string
+	DBName     string
 }
 
-// AWSConfig holds the configuration for AWS services.
 type AWSConfig struct {
-	AWSAccessKeyID     string `env:"AWS_ACCESS_KEY_ID"`
-	AWSSecretAccessKey string `env:"AWS_SECRET_ACCESS_KEY"`
-	AWSRegion          string `env:"AWS_REGION"`
-	AWSS3Bucket        string `env:"AWS_S3_BUCKET"`
-	AWSS3Endpoint      string `env:"AWS_S3_ENDPOINT"`
+	AWSAccessKeyID     string
+	AWSSecretAccessKey string
+	AWSRegion          string
+	AWSS3Bucket        string
+	AWSS3Endpoint      string
 }
 
-// JWTConfig holds the configuration for JWT authentication.
 type JWTConfig struct {
-	JWTSecret         string        `env:"JWT_SECRET"`
-	JWTExpiration     time.Duration `env:"JWT_EXPIRATION"`
-	RefreshExpiration time.Duration `env:"REFRESH_EXPIRATION"`
+	JWTSecret         string
+	JWTExpiration     time.Duration
+	RefreshExpiration time.Duration
 }
 
-// Load reads the configuration from environment variables and returns a Config struct.
 func Load() (*Config, error) {
 	_ = godotenv.Load()
-	jwtExpiration, err := time.ParseDuration(getEnv("JWT_EXPIRATION", "24h"))
+
+	jwtExpiration, err := time.ParseDuration(requiredEnv("JWT_EXPIRATION"))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("invalid JWT_EXPIRATION: %w", err)
 	}
 
-	refreshExpiration, err := time.ParseDuration(getEnv("REFRESH_EXPIRATION", "72h"))
+	refreshExpiration, err := time.ParseDuration(requiredEnv("REFRESH_EXPIRATION"))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("invalid REFRESH_EXPIRATION: %w", err)
 	}
 
-	maxUploadSize, err := strconv.ParseInt(getEnv("MAX_UPLOAD_SIZE", "100"), 10, 64)
+	maxUploadSize, err := strconv.ParseInt(optionalEnv("MAX_UPLOAD_SIZE", "10485760"), 10, 64)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("invalid MAX_UPLOAD_SIZE: %w", err)
 	}
 
-	return &Config{
+	cfg := &Config{
 		App: AppConfig{
-			AppHost: getEnv("APP_HOST", "localhost"),
-			AppPort: getEnv("APP_PORT", "8080"),
-			GinMode: getEnv("GIN_MODE", "debug"),
+			AppHost: optionalEnv("APP_HOST", "localhost"),
+			AppPort: optionalEnv("APP_PORT", "8080"),
+			GinMode: optionalEnv("GIN_MODE", "debug"),
 		},
 		DB: DatabaseConfig{
-			DBHost:     getEnv("DB_HOST", "localhost"),
-			DBPort:     getEnv("DB_PORT", "5432"),
-			DBUser:     getEnv("DB_USER", "your_db_user"),
-			DBPassword: getEnv("DB_PASSWORD", "your_db_password"),
-			DBName:     getEnv("DB_NAME", "your_db_name"),
+			DBHost:     requiredEnv("DB_HOST"),
+			DBPort:     optionalEnv("DB_PORT", "5432"),
+			DBUser:     requiredEnv("DB_USER"),
+			DBPassword: requiredEnv("DB_PASSWORD"),
+			DBName:     requiredEnv("DB_NAME"),
 		},
 		AWS: AWSConfig{
-			AWSAccessKeyID:     getEnv("AWS_ACCESS_KEY_ID", "your_aws_access_key"),
-			AWSSecretAccessKey: getEnv("AWS_SECRET_ACCESS_KEY", "your_aws_secret_key"),
-			AWSRegion:          getEnv("AWS_REGION", "us-east-1"),
-			AWSS3Bucket:        getEnv("AWS_S3_BUCKET", "your_aws_s3_bucket"),
-			AWSS3Endpoint:      getEnv("AWS_S3_ENDPOINT", "http://localhost:9000"),
+			AWSAccessKeyID:     requiredEnv("AWS_ACCESS_KEY_ID"),
+			AWSSecretAccessKey: requiredEnv("AWS_SECRET_ACCESS_KEY"),
+			AWSRegion:          optionalEnv("AWS_REGION", "us-east-1"),
+			AWSS3Bucket:        requiredEnv("AWS_S3_BUCKET"),
+			AWSS3Endpoint:      optionalEnv("AWS_S3_ENDPOINT", "http://localhost:9000"),
 		},
 		JWT: JWTConfig{
-			JWTSecret:         getEnv("JWT_SECRET", "your_jwt_secret_key"),
+			JWTSecret:         requiredEnv("JWT_SECRET"),
 			JWTExpiration:     jwtExpiration,
 			RefreshExpiration: refreshExpiration,
 		},
 		Upload: UploadConfig{
 			MaxUploadSize: maxUploadSize,
-			UploadPath:    getEnv("UPLOAD_PATH", "./uploads"),
+			UploadPath:    optionalEnv("UPLOAD_PATH", "./uploads"),
 		},
-	}, nil
+	}
+
+	return cfg, nil
 }
 
-func getEnv(key, defaultValue string) string {
-	if value, exists := os.LookupEnv(key); exists {
-		return value
+func requiredEnv(key string) string {
+	value := os.Getenv(key)
+	if value == "" {
+		panic(fmt.Sprintf("missing required env: %s", key))
 	}
-	return defaultValue
+	return value
+}
+
+func optionalEnv(key, fallback string) string {
+	value := os.Getenv(key)
+	if value == "" {
+		return fallback
+	}
+	return value
 }
