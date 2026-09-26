@@ -30,7 +30,6 @@ linters:
     - ineffassign # Detects ineffectual assignments
     - staticcheck # Applies massive sets of static analysis checks
     - unused # Finds unused constants, variables, functions, and types
-    - revive # Fast, configurable, extensible drop-in replacement for golint
     - gocyclo # Computes and checks cyclomatic complexity of functions
   settings:
     govet:
