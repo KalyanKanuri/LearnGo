@@ -11,7 +11,7 @@ import (
 )
 
 // New creates a new GORM database connection using the provided database configuration.
-func New(dbConfig config.DatabaseConfig) (*gorm.DB, error) {
+func New(dbConfig *config.DatabaseConfig) (*gorm.DB, error) {
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
 		dbConfig.DBHost,
 		dbConfig.DBPort,
