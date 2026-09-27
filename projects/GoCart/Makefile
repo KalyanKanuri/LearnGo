@@ -13,6 +13,8 @@ help:
 	@echo  docker-up 		- Start docker containers
 	@echo  docker-down  	- Stop docker containers
 
+-include .env
+
 build:
 	@echo "Building the project..."
 	go build -o ./bin/GoCart/go-cart.exe ./cmd/api/main.go
@@ -38,10 +40,10 @@ lint:
 	golangci-lint run
 
 migrate-up:
-	migrate -path db/migrations -database "postgresql://gcdba:gcpwd@localhost:5433/gcdb?sslmode=disable" up
+	migrate -path db/migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" up
 
 migrate-down:
-	migrate -path db/migrations -database "postgresql://gcdba:gcpwd@localhost:5433/gcdb?sslmode=disable" down
+	migrate -path db/migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" down
 
 docker-up:
 	@echo "Starting docker containers..."
