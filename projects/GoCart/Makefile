@@ -33,7 +33,8 @@ run-dev:
 
 fmt:
 	@echo "Formatting the code..."
-	go fmt ./...
+	gofmt -s -w .
+	goimports -w .
 
 lint:
 	@echo "Linting the project..."
