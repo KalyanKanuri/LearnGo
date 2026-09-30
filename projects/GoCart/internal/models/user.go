@@ -10,12 +10,14 @@ const (
 )
 
 type User struct {
-	ID       uint     `json:"id" gorm:"primaryKey"`
-	Email    string   `json:"email" gorm:"uniqueIndex;not null"`
-	Password string   `json:"-" gorm:"not null"`
-	Role     UserRole `json:"role" gorm:"type:varchar(20);not null"`
-	Phone    string   `json:"phone" gorm:"not null"`
-	IsActive bool     `json:"is_active" gorm:"default:true"`
+	ID        uint     `json:"id" gorm:"primaryKey"`
+	Email     string   `json:"email" gorm:"uniqueIndex;not null"`
+	Password  string   `json:"-" gorm:"not null"`
+	FirstName string   `json:"first_name" gorm:"not null"`
+	LastName  string   `json:"last_name" gorm:"not null"`
+	Role      UserRole `json:"role" gorm:"type:varchar(20);not null"`
+	Phone     string   `json:"phone" gorm:"not null"`
+	IsActive  bool     `json:"is_active" gorm:"default:true"`
 	TimeStamps
 
 	RefreshTokens []RefreshToken `gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE" json:"refresh_tokens,omitempty"`
