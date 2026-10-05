@@ -1,4 +1,4 @@
-CREATE TYPE user_role AS ENUM ('Customer', 'Admin')
+CREATE TYPE user_role AS ENUM ('Customer', 'Admin');
 CREATE TABLE
     users (
         id SERIAL PRIMARY KEY,
@@ -10,7 +10,7 @@ CREATE TABLE
         role user_role DEFAULT 'Customer',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        deleted_at TIMESTAMP DEFAULT NULL,
+        deleted_at TIMESTAMP DEFAULT NULL
     );
 
 CREATE INDEX idx_user_email ON users (email);

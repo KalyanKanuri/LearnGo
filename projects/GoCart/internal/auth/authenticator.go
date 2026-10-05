@@ -83,12 +83,12 @@ func ValidateToken(tokenStr, secret, expectedUse string) (*JWTClaims, error) {
 	return nil, errors.New("invalid token")
 }
 
-func GenPwdHash(pwd []byte) (pwdHash []byte, err error) {
-	pwdHash, err = bcrypt.GenerateFromPassword(pwd, bcrypt.DefaultCost)
+func GenPwdHash(pwd []byte) (string, error) {
+	pwdHash, err := bcrypt.GenerateFromPassword(pwd, bcrypt.DefaultCost)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
-	return pwdHash, nil
+	return string(pwdHash), nil
 }
 
 func CheckPwdHash(pwdHash, pwd []byte) (is_valid bool, err error) {

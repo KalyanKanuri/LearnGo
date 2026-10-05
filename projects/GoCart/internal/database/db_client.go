@@ -2,7 +2,6 @@
 package database
 
 import (
-	"database/sql"
 	"fmt"
 	"time"
 
@@ -53,6 +52,6 @@ func New(dbConfig *config.DatabaseConfig, log *zerolog.Logger) (*DataBase, error
 	return &DataBase{db: db, log: log}, nil
 }
 
-func (d *DataBase) GetDB() (*sql.DB, error) {
-	return d.db.DB()
+func (d *DataBase) GetDB() *gorm.DB {
+	return d.db
 }

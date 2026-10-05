@@ -10,6 +10,7 @@ func (srv Server) SetupRoutes() *gin.Engine {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(CorsMiddleware())
+	// router.Use(srv.AuthMiddleware())
 
 	router.GET("/", rootHandler)
 	// fix to suppress unnecessary 404 logs

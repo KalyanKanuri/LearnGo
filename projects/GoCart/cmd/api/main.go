@@ -31,19 +31,8 @@ func main() {
 		log.Fatal().Err(err).Msg("Failed to initialize database connection")
 	}
 
-	dbConn, err := dbClient.GetDB()
-	if err != nil {
-		log.Fatal().Err(err).Msg("Failed to get DB connection")
-	}
-	defer func() {
-		err = dbConn.Close()
-		if err != nil {
-			log.Fatal().Err(err).Msg("Failed to Shutdown DB connection")
-		}
-	}()
-
 	gin.SetMode(conf.App.GinMode)
-	srv := server.New(conf, dbConn, &log)
+	srv := server.New(conf, dbClient.GetDB(), &log)
 	httpServer := &http.Server{
 		Addr:         fmt.Sprintf(":%s", conf.App.AppPort),
 		Handler:      srv.SetupRoutes(),

@@ -41,15 +41,18 @@ lint:
 	golangci-lint run
 
 migrate-up:
-	migrate -path db/migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" up
+	@migrate -path db/migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" up
 
 migrate-down:
-	migrate -path db/migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" down
+	@migrate -path db/migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" down
+
+migrate-force:
+	@migrate -path db/migrations -database "postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=disable" force 0
 
 docker-up:
 	@echo "Starting docker containers..."
-	docker compose -f docker/docker-compose.yaml up -d
+	docker compose --env-file .env -f docker/docker-compose.yaml up -d
 
 docker-down:
 	@echo "Stopping docker containers..."
-	docker compose -f docker/docker-compose.yaml down
+	docker compose --env-file .env -f docker/docker-compose.yaml down

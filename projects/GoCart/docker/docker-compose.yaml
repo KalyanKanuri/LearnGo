@@ -19,9 +19,9 @@ services:
         image: postgres:latest
         container_name: go-cart-db
         environment:
-            POSTGRES_USER: gcdba
-            POSTGRES_PASSWORD: gcpwd
-            POSTGRES_DB: gcdb
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
         ports:
             - "5433:5432"
         volumes:

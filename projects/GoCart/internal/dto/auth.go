@@ -18,7 +18,7 @@ type RefreshTokenRequest struct {
 }
 
 type UserResponse struct {
-	ID        int
+	ID        uint
 	Email     string `json:"email"`
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
@@ -28,7 +28,7 @@ type UserResponse struct {
 }
 
 type AuthResponse struct {
-	User         UserResponse `json:"user"`
-	AccessToken  string       `json:"access_token"`
-	RefreshToken string       `json:"refresh_token"`
+	User         *UserResponse `json:"user"`
+	AccessToken  string        `json:"access_token"`
+	RefreshToken string        `json:"refresh_token"`
 }
