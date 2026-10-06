@@ -14,6 +14,7 @@ import (
 	"github.com/KalyanKanuri/GoCart/internal/database"
 	"github.com/KalyanKanuri/GoCart/internal/logger"
 	"github.com/KalyanKanuri/GoCart/internal/server"
+	"github.com/KalyanKanuri/GoCart/internal/server/handlers"
 	"github.com/gin-gonic/gin"
 )
 
@@ -35,7 +36,7 @@ func main() {
 	srv := server.New(conf, dbClient.GetDB(), &log)
 	httpServer := &http.Server{
 		Addr:         fmt.Sprintf(":%s", conf.App.AppPort),
-		Handler:      srv.SetupRoutes(),
+		Handler:      handlers.SetupRoutes(srv),
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 	}

@@ -1,4 +1,4 @@
-package server
+package middleware
 
 import (
 	"errors"
@@ -6,6 +6,8 @@ import (
 	"strings"
 
 	"github.com/KalyanKanuri/GoCart/internal/auth"
+	"github.com/KalyanKanuri/GoCart/internal/server"
+	"github.com/KalyanKanuri/GoCart/internal/server/utils"
 	"github.com/gin-gonic/gin"
 )
 
@@ -24,11 +26,11 @@ func CorsMiddleware() gin.HandlerFunc {
 	}
 }
 
-func (srv *Server) AuthMiddleware() gin.HandlerFunc {
+func AuthMiddleware(srv *server.Server) gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		authHdr := ctx.GetHeader("Authorization")
 		if authHdr == "" {
-			UnauthorizedError(
+			utils.UnauthorizedError(
 				ctx,
 				"Invalid Authentication Header",
 				errors.New("invalid authorization header"),
@@ -38,7 +40,7 @@ func (srv *Server) AuthMiddleware() gin.HandlerFunc {
 		}
 		tokenParts := strings.Split(authHdr, " ")
 		if len(tokenParts) != 2 || tokenParts[0] != "Bearer" {
-			UnauthorizedError(
+			utils.UnauthorizedError(
 				ctx,
 				"Invalid Authorization Header",
 				errors.New("invalid authorization header"),
@@ -47,9 +49,9 @@ func (srv *Server) AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		claims, err := auth.ValidateToken(tokenParts[1], srv.cfg.JWT.JWTSecret, "Access")
+		claims, err := auth.ValidateToken(tokenParts[1], srv.CFG.JWT.JWTSecret, "Access")
 		if err != nil {
-			UnauthorizedError(ctx, "Invalid token", err)
+			utils.UnauthorizedError(ctx, "Invalid token", err)
 			ctx.Abort()
 			return
 		}

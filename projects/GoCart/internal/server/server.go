@@ -7,15 +7,15 @@ import (
 )
 
 type Server struct {
-	cfg    *config.Config
-	dbConn *gorm.DB
-	logger *zerolog.Logger
+	CFG    *config.Config
+	DBConn *gorm.DB
+	Logger *zerolog.Logger
 }
 
 func New(cfg *config.Config, dbConn *gorm.DB, logger *zerolog.Logger) *Server {
 	return &Server{
-		cfg:    cfg,
-		dbConn: dbConn,
-		logger: logger,
+		CFG:    cfg,
+		DBConn: dbConn,
+		Logger: logger,
 	}
 }

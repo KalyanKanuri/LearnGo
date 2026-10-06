@@ -1,4 +1,4 @@
-package server
+package utils
 
 import (
 	"net/http"
@@ -26,7 +26,7 @@ type PaginatedResponse struct {
 	PaginationMeta
 }
 
-func SuccessResponse(ctx *gin.Context, msg string, data any) {
+func SuccessResponse(ctx *gin.Context, msg string, data ...any) {
 	ctx.JSON(
 		http.StatusOK,
 		Response{

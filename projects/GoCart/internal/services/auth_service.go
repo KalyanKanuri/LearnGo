@@ -61,7 +61,7 @@ func (as *AuthService) RegisterUser(regReq *dto.RegisterRequest) (*dto.AuthRespo
 			return cartErr
 		}
 
-		response, err = genAUthResp(&as.cfg.JWT, &requestedUser)
+		response, err = as.genAUthResp(&requestedUser)
 		if err != nil {
 			return err
 		}
@@ -91,7 +91,7 @@ func (as *AuthService) LoginUser(loginReq *dto.LoginRequest) (*dto.AuthResponse,
 		return nil, errors.New("invalid credentials")
 	}
 
-	response, err = genAUthResp(&as.cfg.JWT, &user)
+	response, err = as.genAUthResp(&user)
 	if err != nil {
 		return nil, err
 	}
@@ -114,5 +114,20 @@ func (as *AuthService) RefreshToken(reftokenReq *dto.RefreshTokenRequest) (*dto.
 	if err := as.db.Where("id=?", claims.ID).Find(user).Error; err != nil {
 		return nil, err
 	}
-	return genAUthResp(&as.cfg.JWT, user)
+	return as.genAUthResp(user)
+}
+
+func (as *AuthService) Logout(logoutReq *dto.RefreshTokenRequest) error {
+	_, err := auth.ValidateToken(logoutReq.RefreshToken, as.cfg.JWT.JWTSecret, "Refresh")
+	if err != nil {
+		return err
+	}
+
+	var refreshToken *models.RefreshToken
+	if err := as.db.Where("token=?", logoutReq.RefreshToken).Find(refreshToken).Error; err != nil {
+		return err
+	}
+	as.db.Delete(refreshToken)
+
+	return nil
 }
