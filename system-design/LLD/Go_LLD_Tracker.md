@@ -68,10 +68,10 @@ SRP refactoring
 
 ## Phase 2 --- Design principles
 
-- [ ] SRP --- Single Responsibility Principle
-  - [ ] Explain responsibility and reasons to change
-  - [ ] Refactor the ParkingLot god object
-  - [ ] Add tests for separated responsibilities
+- [X] SRP --- Single Responsibility Principle
+  - [X] Explain responsibility and reasons to change
+  - [X] Refactor the ParkingLot god object
+  - [X] Add tests for separated responsibilities
 - [ ] OCP --- Open/Closed Principle
   - [ ] Add a new parking allocation policy
   - [ ] Avoid modifying stable service logic
