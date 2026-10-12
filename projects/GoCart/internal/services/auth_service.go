@@ -8,18 +8,21 @@ import (
 	"github.com/KalyanKanuri/GoCart/internal/config"
 	"github.com/KalyanKanuri/GoCart/internal/dto"
 	"github.com/KalyanKanuri/GoCart/internal/models"
+	"github.com/rs/zerolog"
 	"gorm.io/gorm"
 )
 
 type AuthService struct {
 	db  *gorm.DB
 	cfg *config.Config
+	Log *zerolog.Logger
 }
 
-func NewAuthService(dbConn *gorm.DB, cfg *config.Config) *AuthService {
+func NewAuthService(dbConn *gorm.DB, cfg *config.Config, log *zerolog.Logger) *AuthService {
 	return &AuthService{
 		db:  dbConn,
 		cfg: cfg,
+		Log: log,
 	}
 }
 
@@ -61,7 +64,7 @@ func (as *AuthService) RegisterUser(regReq *dto.RegisterRequest) (*dto.AuthRespo
 			return cartErr
 		}
 
-		response, err = as.genAUthResp(&requestedUser)
+		response, err = as.genAUthResp(tx, &requestedUser)
 		if err != nil {
 			return err
 		}
@@ -91,7 +94,7 @@ func (as *AuthService) LoginUser(loginReq *dto.LoginRequest) (*dto.AuthResponse,
 		return nil, errors.New("invalid credentials")
 	}
 
-	response, err = as.genAUthResp(&user)
+	response, err = as.genAUthResp(as.db, &user)
 	if err != nil {
 		return nil, err
 	}
@@ -105,16 +108,16 @@ func (as *AuthService) RefreshToken(reftokenReq *dto.RefreshTokenRequest) (*dto.
 	}
 
 	var refreshToken *models.RefreshToken
-	if err := as.db.Where("token=?", reftokenReq.RefreshToken).Find(refreshToken).Error; err != nil {
+	if err := as.db.Where("token=?", reftokenReq.RefreshToken).Find(&refreshToken).Error; err != nil {
 		return nil, err
 	}
 	as.db.Delete(refreshToken)
 
 	var user *models.User
-	if err := as.db.Where("id=?", claims.ID).Find(user).Error; err != nil {
+	if err := as.db.Where("id=?", claims.UserID).Find(&user).Error; err != nil {
 		return nil, err
 	}
-	return as.genAUthResp(user)
+	return as.genAUthResp(as.db, user)
 }
 
 func (as *AuthService) Logout(logoutReq *dto.RefreshTokenRequest) error {
@@ -124,7 +127,7 @@ func (as *AuthService) Logout(logoutReq *dto.RefreshTokenRequest) error {
 	}
 
 	var refreshToken *models.RefreshToken
-	if err := as.db.Where("token=?", logoutReq.RefreshToken).Find(refreshToken).Error; err != nil {
+	if err := as.db.Where("token=?", logoutReq.RefreshToken).Find(&refreshToken).Error; err != nil {
 		return err
 	}
 	as.db.Delete(refreshToken)

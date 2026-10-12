@@ -1,0 +1,7 @@
+$kind: collection
+description: Health and authentication endpoints for the GoCart API.
+variables:
+  baseUrl: http://localhost:8080
+  email: customer@example.com
+  password: change-me-password-123
+  refreshToken: ""

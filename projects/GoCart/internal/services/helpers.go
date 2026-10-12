@@ -6,9 +6,10 @@ import (
 	"github.com/KalyanKanuri/GoCart/internal/auth"
 	"github.com/KalyanKanuri/GoCart/internal/dto"
 	"github.com/KalyanKanuri/GoCart/internal/models"
+	"gorm.io/gorm"
 )
 
-func (as *AuthService) genAUthResp(user *models.User) (*dto.AuthResponse, error) {
+func (as *AuthService) genAUthResp(tx *gorm.DB, user *models.User) (*dto.AuthResponse, error) {
 	claims := auth.JWTClaims{
 		UserID: user.ID,
 		Email:  user.Email,
@@ -22,11 +23,11 @@ func (as *AuthService) genAUthResp(user *models.User) (*dto.AuthResponse, error)
 
 	reftokenModel := models.RefreshToken{
 		UserID:    claims.UserID,
-		Token:     accessToken,
+		Token:     refreshToken,
 		ExpiresAt: claims.ExpiresAt.Time,
 	}
 
-	if err := as.db.Create(&reftokenModel).Error; err != nil {
+	if err := tx.Create(&reftokenModel).Error; err != nil {
 		return nil, err
 	}
 

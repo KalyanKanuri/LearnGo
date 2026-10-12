@@ -18,7 +18,7 @@ type JWTClaims struct {
 	jwt.RegisteredClaims
 }
 
-func (claims JWTClaims) GenTokenPair(jwtCFG *config.JWTConfig) (accessToken, refreshToken string, err error) {
+func (claims *JWTClaims) GenTokenPair(jwtCFG *config.JWTConfig) (accessToken, refreshToken string, err error) {
 	now := time.Now()
 
 	// Access Token
