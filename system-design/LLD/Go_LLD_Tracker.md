@@ -29,24 +29,23 @@
 - [ ] Phase 9 --- End-to-end LLD projects
 
 **Current phase:** Phase 1 --- LLD foundations
-**Current lesson/task:** Parking Lot domain model; next coding task is
-SRP refactoring
-**Last updated:** YYYY-MM-DD
+**Current lesson/task:** Relationships
+**Last updated:** 2026-10-15
 
 ---
 
 ## Phase 1 --- LLD foundations
 
-- [ ] Problem decomposition and requirements
-  - [ ] Write functional requirements
-  - [ ] Identify constraints and edge cases
-  - [ ] Define acceptance criteria
-- [ ] Objects, state, behavior, and identity
-  - [ ] Model domain entities
-  - [ ] Assign state and behavior
-- [ ] Abstraction and encapsulation
-  - [ ] Protect internal state
-  - [ ] Expose meaningful methods
+- [X] Problem decomposition and requirements
+  - [X] Write functional requirements
+  - [X] Identify constraints and edge cases
+  - [X] Define acceptance criteria
+- [X] Objects, state, behavior, and identity
+  - [X] Model domain entities
+  - [X] Assign state and behavior
+- [X] Abstraction and encapsulation
+  - [X] Protect internal state
+  - [X] Expose meaningful methods
 - [ ] Relationships
   - [ ] Association
   - [ ] Aggregation
