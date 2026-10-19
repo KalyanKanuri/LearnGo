@@ -5,6 +5,7 @@ import (
 	object "fundamentals/Objects"
 	pointers "fundamentals/Pointers"
 	relations "fundamentals/Relations"
+	"fundamentals/polymorphism"
 )
 
 func main() {
@@ -13,4 +14,5 @@ func main() {
 	pointers.SharedStateDemo()
 	EncapAbstract.EncAbs()
 	relations.Rels()
+	polymorphism.Polym()
 }
