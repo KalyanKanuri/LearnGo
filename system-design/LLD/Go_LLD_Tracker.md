@@ -29,7 +29,7 @@
 - [ ] Phase 9 --- End-to-end LLD projects
 
 **Current phase:** Phase 1 --- LLD foundations
-**Current lesson/task:** Composition vs Inheritance
+**Current lesson/task:** UML and interaction flows
 **Last updated:** 2026-10-15
 
 ---
@@ -55,9 +55,9 @@
 - [X] Polymorphism and Go interfaces
   - [X] Define small behavior-based interfaces
   - [X] Use interface values where variation is useful
-- [ ] Composition vs inheritance
-  - [ ] Identify IS-A and HAS-A relationships
-  - [ ] Avoid subclass combinations for independent features
+- [X] Composition vs inheritance
+  - [X] Identify IS-A and HAS-A relationships
+  - [X] Avoid subclass combinations for independent features
 - [ ] UML and interaction flows
   - [ ] Class diagram
   - [ ] Sequence diagram
