@@ -29,7 +29,7 @@
 - [ ] Phase 9 --- End-to-end LLD projects
 
 **Current phase:** Phase 1 --- LLD foundations
-**Current lesson/task:** Polymorphism and Go interfaces
+**Current lesson/task:** Composition vs Inheritance
 **Last updated:** 2026-10-15
 
 ---
