@@ -29,7 +29,7 @@
 - [ ] Phase 9 --- End-to-end LLD projects
 
 **Current phase:** Phase 1 --- LLD foundations
-**Current lesson/task:** Relationships
+**Current lesson/task:** Polymorphism and Go interfaces
 **Last updated:** 2026-10-15
 
 ---
@@ -46,12 +46,12 @@
 - [X] Abstraction and encapsulation
   - [X] Protect internal state
   - [X] Expose meaningful methods
-- [ ] Relationships
-  - [ ] Association
-  - [ ] Aggregation
-  - [ ] Composition
-  - [ ] Inheritance
-  - [ ] Dependency
+- [X] Relationships
+  - [X] Association
+  - [X] Aggregation
+  - [X] Composition
+  - [X] Inheritance
+  - [X] Dependency
 - [ ] Polymorphism and Go interfaces
   - [ ] Define small behavior-based interfaces
   - [ ] Use interface values where variation is useful
