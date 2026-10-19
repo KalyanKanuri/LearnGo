@@ -52,9 +52,9 @@
   - [X] Composition
   - [X] Inheritance
   - [X] Dependency
-- [ ] Polymorphism and Go interfaces
-  - [ ] Define small behavior-based interfaces
-  - [ ] Use interface values where variation is useful
+- [X] Polymorphism and Go interfaces
+  - [X] Define small behavior-based interfaces
+  - [X] Use interface values where variation is useful
 - [ ] Composition vs inheritance
   - [ ] Identify IS-A and HAS-A relationships
   - [ ] Avoid subclass combinations for independent features
