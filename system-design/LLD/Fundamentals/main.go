@@ -5,6 +5,7 @@ import (
 	object "fundamentals/Objects"
 	pointers "fundamentals/Pointers"
 	relations "fundamentals/Relations"
+	uml "fundamentals/UML"
 	"fundamentals/polymorphism"
 )
 
@@ -15,4 +16,5 @@ func main() {
 	EncapAbstract.EncAbs()
 	relations.Rels()
 	polymorphism.Polym()
+	uml.UMLDemo()
 }
