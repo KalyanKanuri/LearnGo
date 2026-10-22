@@ -58,10 +58,10 @@
 - [X] Composition vs inheritance
   - [X] Identify IS-A and HAS-A relationships
   - [X] Avoid subclass combinations for independent features
-- [ ] UML and interaction flows
-  - [ ] Class diagram
-  - [ ] Sequence diagram
-  - [ ] State diagram
+- [X] UML and interaction flows
+  - [X] Class diagram
+  - [X] Sequence diagram
+  - [X] State diagram
 
 ## **Phase 1 notes / review findings:**
 

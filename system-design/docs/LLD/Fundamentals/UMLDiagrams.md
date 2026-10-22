@@ -50,3 +50,22 @@ sequenceDiagram
         Lot-->>Caller: Error
     end
 ```
+
+## Class Diagram
+
+A class diagram shows a system's classes, their attributes and methods, and the relationships between them.
+
+## Sequence Diagram
+
+A sequence diagram shows how participants exchange messages over time and the order in which interactions occur.
+
+## State Diagram
+
+A state diagram shows the possible states of an object or system and the transitions that move it between states.
+
+## Properties
+
+Rounded rectangles represent states.
+Arrows represent transitions.
+Labels on arrows describe the event that triggers the transition and, optionally, a condition or resulting action.
+A filled circle represents the initial pseudostate.

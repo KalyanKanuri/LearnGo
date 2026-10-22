@@ -71,9 +71,37 @@ func TestOccupySpot_AlreadyOccupied(t *testing.T) {
 	err := lot.OccupySpot("A101")
 
 	if err == nil {
-		t.Fatalf("Failed to test spot\n")
+		t.Fatalf("expected an error when occupying an already occupied spot\n")
 	}
 	if spot.IsAvailable() {
 		t.Errorf("expected spot to be occupied\n")
+	}
+}
+
+/*
+Test a nonexistent spot
+Write TestOccupySpot_NotFound.
+
+Requirements:
+1. Create a lot containing one spot, "A101".
+2. Call lot.OccupySpot("A999").
+3. Verify that an error is returned.
+4. Verify that the existing "A101" spot remains available.
+*/
+func TestOccupySpot_NotFound(t *testing.T) {
+	lot := UMLLot{}
+	spot := parkinglot.ParkingSpot{
+		ID:       "A101",
+		Occupied: false,
+	}
+	lot.Spots = append(lot.Spots, &spot)
+
+	err := lot.OccupySpot("A999")
+	if err == nil {
+		t.Fatalf("expected an error while searching non-existent spot")
+	}
+
+	if !spot.IsAvailable() {
+		t.Errorf("expected the spot to be available")
 	}
 }
