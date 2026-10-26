@@ -29,6 +29,12 @@ func SetupRoutes(srv *server.Server) *gin.Engine {
 			auth.POST("/refresh-token", refreshTokenHandler)
 			auth.POST("/logout", logoutHandler)
 		}
+
+		user := api.Group("/user")
+		{
+			user.GET("/profile", GetProfileHandler)
+			user.PUT("/profile", UpdateProfileHandler)
+		}
 	}
 
 	return router
