@@ -4,6 +4,7 @@ type Category struct {
 	ID          uint   `json:"id" gorm:"primaryKey"`
 	Name        string `json:"name" gorm:"uniqueIndex;not null"`
 	Description string `json:"description" gorm:"not null"`
+	IsActive    bool   `json:"is_active" gorm:"default:true"`
 	TimeStamps
 
 	// Relations

@@ -12,13 +12,15 @@ func SetupRoutes(srv *server.Server) *gin.Engine {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(middleware.CorsMiddleware())
-	// router.Use(srv.AuthMiddleware())
 
 	router.GET("/", rootHandler)
 	// fix to suppress unnecessary 404 logs
 	router.GET("/favicon.ico", faviconHandler)
 
 	InitAuthHandlers(srv)
+	InitUserHandlers(srv)
+	InitProductHandlers(srv)
+
 	api := router.Group("/api/v1")
 	{
 		// Register Auth Handlers
@@ -30,10 +32,14 @@ func SetupRoutes(srv *server.Server) *gin.Engine {
 			auth.POST("/logout", logoutHandler)
 		}
 
-		user := api.Group("/user")
+		protected := api.Group("/")
+		protected.Use(middleware.AuthMiddleware(srv))
 		{
-			user.GET("/profile", GetProfileHandler)
-			user.PUT("/profile", UpdateProfileHandler)
+			users := protected.Group("/users")
+			{
+				users.GET("/profile", GetProfileHandler)
+				users.PUT("/profile", UpdateProfileHandler)
+			}
 		}
 	}
 

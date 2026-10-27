@@ -18,7 +18,7 @@ func InitUserHandlers(srv *server.Server) {
 }
 
 func GetProfileHandler(ctx *gin.Context) {
-	userID := ctx.GetUint("id")
+	userID := ctx.GetUint("user_id")
 	resp, err := userService.GetProfile(userID)
 	if err != nil {
 		userService.Log.Error().Str("handler", "get_profile").Uint("user_id", userID).Err(err).Msg("failed to get user profile")
@@ -31,7 +31,7 @@ func GetProfileHandler(ctx *gin.Context) {
 }
 
 func UpdateProfileHandler(ctx *gin.Context) {
-	userID := ctx.GetUint("id")
+	userID := ctx.GetUint("user_id")
 	var req *dto.UpdateUserRequest
 	if err := ctx.ShouldBindJSON(&req); err != nil {
 		userService.Log.Error().Str("handler", "update_profile").Uint("user_id", userID).Err(err).Msg("profile update request binding failed")
