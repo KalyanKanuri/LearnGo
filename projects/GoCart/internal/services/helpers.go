@@ -40,8 +40,55 @@ func (as *AuthService) genAUthResp(tx *gorm.DB, user *models.User) (*dto.AuthRes
 			Role:      string(user.Role),
 			Phone:     user.Phone,
 			IsActive:  user.IsActive,
+			CreatedAt: user.CreatedAt,
+			UpdatedAt: user.UpdatedAt,
 		},
 		AccessToken:  accessToken,
 		RefreshToken: refreshToken,
 	}, nil
+}
+
+func convToCategoryResponse(category *models.Category) *dto.CategoryResponse {
+	return &dto.CategoryResponse{
+		ID:          category.ID,
+		Name:        category.Name,
+		Description: category.Description,
+		IsActive:    category.IsActive,
+		CreatedAt:   category.CreatedAt,
+		UpdatedAt:   category.UpdatedAt,
+	}
+}
+
+func convToProductResponse(product *models.Product) *dto.ProductResponse {
+	images := make([]dto.ProductImagesResponse, len(product.Images))
+
+	for i := range product.Images {
+		images[i] = dto.ProductImagesResponse{
+			ID:        product.Images[i].ID,
+			URL:       product.Images[i].URL,
+			CreatedAt: product.Images[i].CreatedAt,
+			UpdatedAt: product.Images[i].UpdatedAt,
+		}
+	}
+
+	return &dto.ProductResponse{
+		ID:          product.ID,
+		Name:        product.Name,
+		Description: product.Description,
+		Price:       product.Price,
+		Stock:       product.Stock,
+		SKU:         product.SKU,
+		IsActive:    product.IsActive,
+		Category: dto.CategoryResponse{
+			ID:          product.CategoryID,
+			Name:        product.Category.Name,
+			Description: product.Category.Description,
+			IsActive:    product.Category.IsActive,
+			CreatedAt:   product.Category.CreatedAt,
+			UpdatedAt:   product.Category.UpdatedAt,
+		},
+		Images:    images,
+		CreatedAt: product.CreatedAt,
+		UpdatedAt: product.UpdatedAt,
+	}
 }

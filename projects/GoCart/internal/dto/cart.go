@@ -12,10 +12,12 @@ type UpdateCartRequest struct {
 }
 
 type CartItemResponse struct {
-	ID       uint            `json:"id"`
-	Product  ProductResponse `json:"product"`
-	Quantity uint            `json:"quantity"`
-	Subtotal float64         `json:"sub_total"`
+	ID        uint            `json:"id"`
+	Product   ProductResponse `json:"product"`
+	Quantity  uint            `json:"quantity"`
+	Subtotal  float64         `json:"sub_total"`
+	CreatedAt time.Time       `json:"created_at"`
+	UpdatedAt time.Time       `json:"updated_at"`
 }
 
 type CartResponse struct {
@@ -23,19 +25,6 @@ type CartResponse struct {
 	UserID    uint               `json:"user_id"`
 	CartItems []CartItemResponse `json:"cart_items"`
 	Total     float64            `json:"total"`
-}
-
-type OrderItemResponse struct {
-	ID       uint            `json:"id"`
-	Product  ProductResponse `json:"product"`
-	Quantity uint            `json:"quantity"`
-	Price    float64         `json:"price"`
-}
-
-type OrderResponse struct {
-	ID        uint                `json:"id"`
-	UserID    uint                `json:"user_id"`
-	Status    string              `json:"status"`
-	Items     []OrderItemResponse `json:"items"`
-	CreatedAt time.Time           `json:"created_at"`
+	CreatedAt time.Time          `json:"created_at"`
+	UpdatedAt time.Time          `json:"updated_at"`
 }

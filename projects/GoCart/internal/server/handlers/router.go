@@ -40,6 +40,26 @@ func SetupRoutes(srv *server.Server) *gin.Engine {
 				users.GET("/profile", GetProfileHandler)
 				users.PUT("/profile", UpdateProfileHandler)
 			}
+			categories := protected.Group("/categories")
+			{
+				categories.GET("", GetCategoriesHandler)
+				categories.POST("", CreateCategoryHandler)
+				categories.PUT("", UpdateCategoryHandler)
+				categories.DELETE("", DeleteCategoryHandler)
+			}
+			products := protected.Group("/products")
+			{
+				products.GET("", func(ctx *gin.Context) {
+					if _, exists := ctx.GetQuery("prod_id"); exists {
+						GetProductHandler(ctx)
+						return
+					}
+					GetProductsHandler(ctx)
+				})
+				products.POST("", AddProductHandler)
+				products.PUT("", UpdateProductHandler)
+				products.DELETE("", DeleteProductHandler)
+			}
 		}
 	}
 

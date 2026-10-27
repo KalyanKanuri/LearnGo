@@ -21,9 +21,23 @@ type PaginationMeta struct {
 	TotalPages uint `json:"total_pages"`
 }
 
-type PaginatedResponse struct {
+type PaginatedData struct {
 	Response
 	PaginationMeta
+}
+
+func PaginatedResponse(ctx *gin.Context, msg string, data any, paginationInfo PaginationMeta) {
+	ctx.JSON(
+		http.StatusOK,
+		PaginatedData{
+			Response: Response{
+				Success: true,
+				Message: msg,
+				Data:    data,
+			},
+			PaginationMeta: paginationInfo,
+		},
+	)
 }
 
 func SuccessResponse(ctx *gin.Context, msg string, data ...any) {

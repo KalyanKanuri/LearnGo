@@ -34,6 +34,8 @@ func (us *UserService) GetProfile(userID uint) (*dto.UserResponse, error) {
 		Role:      string(User.Role),
 		Phone:     User.Phone,
 		IsActive:  User.IsActive,
+		CreatedAt: User.CreatedAt,
+		UpdatedAt: User.UpdatedAt,
 	}, nil
 }
 
