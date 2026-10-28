@@ -9,6 +9,8 @@ import (
 func SetupRoutes(srv *server.Server) *gin.Engine {
 	router := gin.New()
 
+	InitHealthCheck(srv)
+
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 	router.Use(middleware.CorsMiddleware())

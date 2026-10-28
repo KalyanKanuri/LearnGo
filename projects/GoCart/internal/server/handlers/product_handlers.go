@@ -79,12 +79,12 @@ func UpdateCategoryHandler(ctx *gin.Context) {
 	}
 
 	var req *dto.UpdateCategoryRequest
-	if err := ctx.ShouldBindJSON(&req); err != nil {
-		productService.Log.Error().Str("handler", "update_category").Uint("category_id", uint(categoryID)).Err(err).Msg("update category request binding failed")
+	if bindErr := ctx.ShouldBindJSON(&req); bindErr != nil {
+		productService.Log.Error().Str("handler", "update_category").Uint("category_id", uint(categoryID)).Err(bindErr).Msg("update category request binding failed")
 		utils.BadRequestError(
 			ctx,
 			"Invalid Request",
-			err,
+			bindErr,
 		)
 		return
 	}
@@ -193,12 +193,12 @@ func UpdateProductHandler(ctx *gin.Context) {
 	}
 
 	var req *dto.UpdateProductRequest
-	if err := ctx.ShouldBindJSON(&req); err != nil {
-		productService.Log.Error().Str("handler", "update_product").Uint("product_id", uint(productID)).Err(err).Msg("update product request binding failed")
+	if bindErr := ctx.ShouldBindJSON(&req); bindErr != nil {
+		productService.Log.Error().Str("handler", "update_product").Uint("product_id", uint(productID)).Err(bindErr).Msg("update product request binding failed")
 		utils.BadRequestError(
 			ctx,
 			"invalid request",
-			err,
+			bindErr,
 		)
 		return
 	}
