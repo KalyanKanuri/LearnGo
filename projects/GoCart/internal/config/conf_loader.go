@@ -51,7 +51,10 @@ type JWTConfig struct {
 }
 
 func Load() (*Config, error) {
-	_ = godotenv.Load()
+	err := godotenv.Load()
+	if err != nil {
+		return nil, fmt.Errorf("error loading env file: %w", err)
+	}
 
 	jwtExpiration, err := time.ParseDuration(requiredEnv("JWT_EXPIRATION"))
 	if err != nil {
