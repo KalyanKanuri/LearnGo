@@ -4,9 +4,9 @@ import (
 	"fundamentals/EncapAbstract"
 	object "fundamentals/Objects"
 	pointers "fundamentals/Pointers"
+	polymorphism "fundamentals/Polymorphism"
 	relations "fundamentals/Relations"
 	uml "fundamentals/UML"
-	"fundamentals/polymorphism"
 )
 
 func main() {

@@ -7,7 +7,7 @@ Requirements
  4. For this exercise, assume a car can fit only in a spot whose ID is 101. Return true for that spot and false otherwise.
  5. Don't add type switches, reflection, or a ParkingService yet.
 */
-package polymorphism
+package Polymorphism
 
 import (
 	"fmt"
