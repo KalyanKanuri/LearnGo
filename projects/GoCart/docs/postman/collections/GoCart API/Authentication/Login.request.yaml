@@ -11,3 +11,12 @@ body:
       "password": "user1pass@123"
     }
 order: 2000
+scripts:
+  - type: afterResponse
+    code: |-
+      const json = pm.response.json();
+      const data = json.data[0];
+      console.log(data.access_token)
+      await pm.vault.set("access_token", data.access_token);
+      await pm.vault.set("refresh_token", data.refresh_token);
+    language: text/javascript

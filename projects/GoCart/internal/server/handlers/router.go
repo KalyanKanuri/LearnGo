@@ -25,13 +25,19 @@ func SetupRoutes(srv *server.Server) *gin.Engine {
 
 	api := router.Group("/api/v1")
 	{
-		// Register Auth Handlers
+		// Auth Handlers
 		auth := api.Group("/auth")
 		{
 			auth.POST("/register", registerHandler)
 			auth.POST("/login", loginHandler)
-			auth.POST("/refresh-token", refreshTokenHandler)
-			auth.POST("/logout", logoutHandler)
+		}
+
+		authProtected := auth
+		authProtected.Use(middleware.AuthMiddleware(srv))
+		{
+			authProtected.POST("/refresh-token", refreshTokenHandler)
+			authProtected.POST("/logout", logoutHandler)
+
 		}
 
 		protected := api.Group("/")

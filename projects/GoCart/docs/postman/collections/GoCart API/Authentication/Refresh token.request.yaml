@@ -7,6 +7,6 @@ body:
   type: json
   content: |-
     {
-      "refresh_token": "{{refreshToken}}"
+      "refresh_token": "{{vault:refresh_token}}"
     }
 order: 3000
